@@ -11,7 +11,7 @@ const IssuesListEntry = (props) => {
 
   const content = (
     <tr>
-      <th scope="row"><Status color='#ED8077'>Open</Status></th>
+      <th scope="row"><Status className="white-text" color='#ED8077'>Open</Status></th>
       <td><i className="material-icons">arrow_downward</i></td>
       <td>Mar. 18</td>
       <td>subject 2</td>
