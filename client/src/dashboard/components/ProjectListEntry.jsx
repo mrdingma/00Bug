@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Row from '../elements/row';
+import ProjectListButtons from './ProjectListButtons.jsx';
 
-const ProjectListListEntry = (props) => {
+
+const ProjectListEntry = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const hoverHandler = (value) => {
@@ -10,19 +13,25 @@ const ProjectListListEntry = (props) => {
   let content = (
     <ul className="collapsible">
       <li>
-        <div className="collapsible-header">
-          <div>
-            <i className="material-icons">business</i>
+        <div
+          className="collapsible-header"
+          style={{ backgroundColor: isHovered ? '#4CAF93' : 'white', padding: '0.5rem' }}
+          onMouseEnter={() => hoverHandler(true)}
+          onMouseLeave={() => hoverHandler(false)}
+        >
+          <div style={{ alignSelf: 'center' }}>
+            <i className={isHovered ? 'material-icons white-text' : 'material-icons'}>
+              business
+            </i>
           </div>
-          <div>Project1</div>
-        </div>
-      </li>
-      <li>
-        <div className="collapsible-header">
-          <div>
-            <i className="material-icons">business</i>
-          </div>
-          <div>Project2</div>
+          <Row className={isHovered ? 'row white-text' : 'row black-text'}>
+            <div className="col s1">Project1</div>
+            {
+              isHovered
+                ? <ProjectListButtons />
+                : null
+            }
+          </Row>
         </div>
       </li>
     </ul>
@@ -31,4 +40,4 @@ const ProjectListListEntry = (props) => {
   return content;
 };
 
-export default ProjectListListEntry;
+export default ProjectListEntry;
