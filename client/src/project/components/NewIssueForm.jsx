@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DatePicker } from 'react-materialize';
 import FormBody from '../elements/formBody';
+import date from 'date-and-time';
 
 const NewIssueForm = (props) => {
   const [subject, setSubject] = useState('');
@@ -16,6 +17,10 @@ const NewIssueForm = (props) => {
     M.FormSelect.init(elems, {});
     M.textareaAutoResize($('#textarea1'));
   });
+
+  const dueDateHandler = (e) => {
+    setDueDate(date.format(e, 'YYYY-MM-DD'));
+  };
 
   let content = (
     <>
@@ -77,7 +82,7 @@ const NewIssueForm = (props) => {
                   <DatePicker
                     value={dueDate}
                     id="myDate"
-                    onChange={(date) => setDueDate(date)}
+                    onChange={(e) => dueDateHandler(e)}
                   />
                 </div>
               </div>
