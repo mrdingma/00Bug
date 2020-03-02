@@ -8,13 +8,13 @@ const SideBarBtnEntry = ({ type, clickIssueViewHandler, clickProjectHomeHandler,
   };
 
   const onClickHandler = (e) => {
-    if (e.target.name === 'home') {
+    if (e.target.name === 'home' || e.target.innerText === 'home') {
       clickProjectHomeHandler();
     }
-    if (e.target.name === 'add') {
+    if (e.target.name === 'add' || e.target.innerText === 'add') {
       clickNewIssueViewHandler();
     }
-    if (e.target.name === 'storage') {
+    if (e.target.name === 'storage' || e.target.innerText === 'storage') {
       clickIssueViewHandler();
     }
   };
@@ -24,10 +24,11 @@ const SideBarBtnEntry = ({ type, clickIssueViewHandler, clickProjectHomeHandler,
       className="tooltipped sidebtn"
       onMouseEnter={() => hoverHandler(true)}
       onMouseLeave={() => hoverHandler(false)}
+      name={type}
+      onClick={(e) => onClickHandler(e)}
     >
       <i
         name={type}
-        onClick={(e) => onClickHandler(e)}
         className="sideIcon material-icons"
         style={{ color: isHovered ? '#4CAF93' : 'white' }}
       >
