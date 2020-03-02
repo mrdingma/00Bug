@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import SideBar from './SideBarContainer.jsx';
+import SideBarContainer from './SideBarContainer.jsx';
 
-const Home = (props) => {
+const Home = ({ clickIssueViewHandler, clickProjectHomeHandler, clickDashboardHandler, clickNewIssueViewHandler }) => {
   // const [isClicked, setIsClicked] = useState(false);
 
   // const onClickHandler = () => {
@@ -13,7 +13,12 @@ const Home = (props) => {
 
   let content = (
     <>
-      <SideBar />
+      <SideBarContainer
+        clickProjectHomeHandler={clickProjectHomeHandler}
+        clickDashboardHandler={clickDashboardHandler}
+        clickNewIssueViewHandler={clickNewIssueViewHandler}
+        clickIssueViewHandler={clickIssueViewHandler}
+      />
     </>
   );
 

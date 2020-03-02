@@ -25,7 +25,7 @@ const ProjectList = (props) => {
           {
             isClicked
               ? null
-              : <ProjectListListEntry />
+              : <ProjectListListEntry clickProjectHomeHandler={props.clickProjectHomeHandler} />
           }
         </li>
       </ul>

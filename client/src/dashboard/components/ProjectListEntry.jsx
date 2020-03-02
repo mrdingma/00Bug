@@ -15,7 +15,7 @@ const ProjectListEntry = (props) => {
       <li>
         <div
           className="collapsible-header"
-          style={{ backgroundColor: isHovered ? '#4CAF93' : 'white', padding: '0.5rem' }}
+          style={{ backgroundColor: isHovered ? '#4CAF93' : 'white', padding: '0.5rem', cursor: 'auto' }}
           onMouseEnter={() => hoverHandler(true)}
           onMouseLeave={() => hoverHandler(false)}
         >
@@ -25,7 +25,7 @@ const ProjectListEntry = (props) => {
             </i>
           </div>
           <Row className={isHovered ? 'row white-text' : 'row black-text'}>
-            <div className="col s1">Project1</div>
+            <div className="col s1" style={{ cursor: 'pointer' }} onClick={() => props.clickProjectHomeHandler()}>Project1</div>
             {
               isHovered
                 ? <ProjectListButtons />

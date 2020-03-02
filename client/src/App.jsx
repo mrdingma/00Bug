@@ -9,23 +9,34 @@ const App = (props) => {
   const [isDashboardView, setIsDashboardView] = useState(true);
   const [isProjectHomeView, setIsProjectHomeView] = useState(false);
   const [isNewIssueView, setIsNewIssueView] = useState(false);
+  const [isIssueView, setIsIssueView] = useState(false);
 
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
     setIsProjectHomeView(false);
     setIsNewIssueView(false);
+    setIsIssueView(false);
+  };
+
+  const clickIssueViewHandler = () => {
+    setIsDashboardView(false);
+    setIsProjectHomeView(false);
+    setIsNewIssueView(false);
+    setIsIssueView(true);
   };
 
   const clickProjectHomeHandler = () => {
     setIsDashboardView(false);
     setIsProjectHomeView(true);
     setIsNewIssueView(false);
+    setIsIssueView(false);
   };
 
   const clickNewIssueViewHandler = () => {
     setIsDashboardView(false);
     setIsProjectHomeView(false);
     setIsNewIssueView(true);
+    setIsIssueView(false);
   };
 
   let content = (
@@ -39,20 +50,51 @@ const App = (props) => {
       <>
         <Header />
         <div className="row">
-          <ProjectList />
+          <ProjectList clickProjectHomeHandler={clickProjectHomeHandler} />
           <RecentUpdatesContainer />
         </div>
         <div className="row">
           <IssuesListContainer />
         </div>
       </>
-    )
+    );
   }
 
   if (isProjectHomeView) {
     content = (
       <>
-        <ProjectHome />
+        <ProjectHome
+          clickProjectHomeHandler={clickProjectHomeHandler}
+          clickDashboardHandler={clickDashboardHandler}
+          clickNewIssueViewHandler={clickNewIssueViewHandler}
+          clickIssueViewHandler={clickIssueViewHandler}
+        />
+      </>
+    );
+  }
+
+  if (isNewIssueView) {
+    content = (
+      <>
+        <ProjectHome
+          clickProjectHomeHandler={clickProjectHomeHandler}
+          clickDashboardHandler={clickDashboardHandler}
+          clickNewIssueViewHandler={clickNewIssueViewHandler}
+          clickIssueViewHandler={clickIssueViewHandler}
+        />
+      </>
+    );
+  }
+
+  if (isIssueView) {
+    content = (
+      <>
+        <ProjectHome
+          clickProjectHomeHandler={clickProjectHomeHandler}
+          clickDashboardHandler={clickDashboardHandler}
+          clickNewIssueViewHandler={clickNewIssueViewHandler}
+          clickIssueViewHandler={clickIssueViewHandler}
+        />
       </>
     );
   }
