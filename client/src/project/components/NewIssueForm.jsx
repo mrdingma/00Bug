@@ -71,7 +71,7 @@ const NewIssueForm = (props) => {
                   </select>
                 </div>
               </div>
-              <div className="col s5 offset-s2" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
+              <div name="duedate" className="col s5 offset-s2" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
                 <div>Due date</div>
                 <div style={{ paddingLeft: '24px' }}>
                   <DatePicker
@@ -81,21 +81,23 @@ const NewIssueForm = (props) => {
                   />
                 </div>
               </div>
-              <div className="col s5">
-                <form action="#">
-                  <div className="file-field input-field">
-                    <div className="waves-effect btn-small">
-                      <span>Attach</span>
-                      <input type="file" onChange={(e) => setAttachment(e.target.files[0])} />
+              <div className="col s5" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
+                <div>
+                  <form action="#">
+                    <div className="file-field input-field">
+                      <div className="waves-effect btn-small">
+                        <span>Attach</span>
+                        <input type="file" onChange={(e) => setAttachment(e.target.files[0])} />
+                      </div>
+                      <div className="file-path-wrapper">
+                        <input className="file-path validate" type="text" />
+                      </div>
                     </div>
-                    <div className="file-path-wrapper">
-                      <input className="file-path validate" type="text" />
-                    </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
-              <div className="col s5 offset-s2">
-                <a class="waves-effect btn">button</a>
+              <div className="col s5 offset-s2" style={{ paddingLeft: '17%', paddingTop: '3%' }}>
+                <a class="waves-effect btn">Add</a>
               </div>
             </FormBody>
           </div>
