@@ -20,9 +20,7 @@ const RecentUpdatesList = (props) => {
             <th>{now}</th>
           </tr>
           <tr>
-            <ul>
-              <RecentUpdatesEntry />
-            </ul>
+            {/* <RecentUpdatesEntry /> */}
           </tr>
         </thead>
       </table>
