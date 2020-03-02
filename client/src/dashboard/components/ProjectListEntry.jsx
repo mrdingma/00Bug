@@ -28,7 +28,12 @@ const ProjectListEntry = (props) => {
             <div className="col s1" style={{ cursor: 'pointer' }} onClick={() => props.clickProjectHomeHandler()}>Project1</div>
             {
               isHovered
-                ? <ProjectListButtons />
+                ? (
+                  <ProjectListButtons
+                    clickIssueViewHandler={props.clickIssueViewHandler}
+                    clickNewIssueViewHandler={props.clickNewIssueViewHandler}
+                  />
+                )
                 : null
             }
           </Row>

@@ -50,7 +50,11 @@ const App = (props) => {
       <>
         <Header />
         <div className="row">
-          <ProjectList clickProjectHomeHandler={clickProjectHomeHandler} />
+          <ProjectList
+            clickProjectHomeHandler={clickProjectHomeHandler}
+            clickIssueViewHandler={clickIssueViewHandler}
+            clickNewIssueViewHandler={clickNewIssueViewHandler}
+          />
           <RecentUpdatesContainer />
         </div>
         <div className="row">
