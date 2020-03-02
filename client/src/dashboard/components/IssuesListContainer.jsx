@@ -8,29 +8,34 @@ const IssuesListContainer = (props) => {
     setIsClicked(!isClicked);
   };
 
-  // need to map the issuesList
-
   let content = (
     <div className="col s5 offset-s1">
       <ul>
         <li>
           <div onClick={onClickHandler}>
-            {
-              isClicked
-                ? <i className="material-icons">keyboard_arrow_down</i>
-                : <i className="material-icons">keyboard_arrow_up</i>
-            }
+            <i className="material-icons">keyboard_arrow_up</i>
             My Issues
           </div>
-          {
-            isClicked
-              ? null
-              : <IssuesList />
-          }
+          <IssuesList issues={props.issues} />
         </li>
       </ul>
     </div>
   );
+
+  if (isClicked) {
+    content = (
+      <div className="col s5 offset-s1">
+        <ul>
+          <li>
+            <div onClick={onClickHandler}>
+              <i className="material-icons">keyboard_arrow_down</i>
+              My Issues
+          </div>
+          </li>
+        </ul>
+      </div>
+    );
+  };
 
   return content;
 };

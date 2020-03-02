@@ -14,7 +14,14 @@ const IssuesList = (props) => {
           </tr>
         </thead>
         <tbody>
-          <IssuesListEntry />
+          {
+            props.issues.map((issue) => {
+              if (issue.status !== 'closed') {
+                return <IssuesListEntry issue={issue} />;
+              }
+              return null;
+            })
+          }
         </tbody>
       </table>
     </div>
