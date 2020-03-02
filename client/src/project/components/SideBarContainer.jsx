@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideBarBtnList from './SideBarBtnList.jsx';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 // TODO: highlight current button
 
-class SideBar extends Component {
-  componentDidMount() {
-    document.addEventListener('DOMContentLoaded', () => {
-      const el1 = document.querySelectorAll('.sidenav');
-      const el2 = document.querySelectorAll('.tooltipped');
-      M.Sidenav.init(el1, {});
-      M.Tooltip.init(el2, {});
-    });
-  }
+const SideBarContainer = ({ clickIssueViewHandler, clickProjectHomeHandler, clickDashboardHandler, clickNewIssueViewHandler }) => {
+  useEffect(() => {
+    const sidenav = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenav, {});
+  });
 
-  render() {
-    return (
-      <>
-        <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="menu material-icons">menu</i></a>
-        <ul id="slide-out" className="sidenav sidenav-fixed">
-          <SideBarBtnList />
-        </ul>
-      </>
-    );
-  }
+  return (
+    <>
+      <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="menu material-icons">menu</i></a>
+      <ul id="slide-out" className="sidenav sidenav-fixed">
+        <SideBarBtnList
+          clickProjectHomeHandler={clickProjectHomeHandler}
+          clickDashboardHandler={clickDashboardHandler}
+          clickNewIssueViewHandler={clickNewIssueViewHandler}
+          clickIssueViewHandler={clickIssueViewHandler}
+        />
+      </ul>
+    </>
+  );
 }
 
-export default SideBar;
+export default SideBarContainer;

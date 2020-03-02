@@ -1,21 +1,38 @@
 import React, { useEffect, useState } from 'react';
 
-const SideBarBtnEntry = ({ tip, type }) => {
+const SideBarBtnEntry = ({ type, clickIssueViewHandler, clickProjectHomeHandler, clickNewIssueViewHandler }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const hoverHandler = (value) => {
     setIsHovered(value);
   };
 
+  const onClickHandler = (e) => {
+    if (e.target.name === 'home') {
+      clickProjectHomeHandler();
+    }
+    if (e.target.name === 'add') {
+      clickNewIssueViewHandler();
+    }
+    if (e.target.name === 'storage') {
+      clickIssueViewHandler();
+    }
+  };
+
   let content = (
     <li
       className="tooltipped sidebtn"
-      data-position="right"
-      data-tooltip={tip}
       onMouseEnter={() => hoverHandler(true)}
       onMouseLeave={() => hoverHandler(false)}
     >
-      <i className="sideIcon material-icons" style={{ color: isHovered ? '#4CAF93' : 'white' }}>{type}</i>
+      <i
+        name={type}
+        onClick={(e) => onClickHandler(e)}
+        className="sideIcon material-icons"
+        style={{ color: isHovered ? '#4CAF93' : 'white' }}
+      >
+        {type}
+      </i>
     </li>
   );
 
