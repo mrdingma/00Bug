@@ -7,6 +7,11 @@ import IssuesListContainer from './dashboard/components/IssuesListContainer.jsx'
 import ProjectHome from './project/components/Home.jsx';
 import NewIssueForm from './project/components/NewIssueForm.jsx';
 import ProjectHeader from './project/elements/projectHeader';
+import ProjectIssuesListContainer from './project/components/ProjectIssuesListContainer.jsx';
+
+import allProjects from './allProjects';
+import allIssues from './allissues';
+import allIssuesForProject from './allIssuesForProject';
 
 const App = (props) => {
   const [isDashboardView, setIsDashboardView] = useState(true);
@@ -59,6 +64,7 @@ const App = (props) => {
         <Header />
         <div className="row">
           <ProjectList
+            projects={allProjects}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickIssueViewHandler={clickIssueViewHandler}
             clickNewIssueViewHandler={clickNewIssueViewHandler}
@@ -66,7 +72,7 @@ const App = (props) => {
           <RecentUpdatesContainer />
         </div>
         <div className="row">
-          <IssuesListContainer />
+          <IssuesListContainer issues={allIssues} />
         </div>
       </>
     );
@@ -100,7 +106,7 @@ const App = (props) => {
               clickIssueViewHandler={clickIssueViewHandler}
             />
           </div>
-          <div class="col s12 m8 l9" style={{ marginTop: '7%' }}>
+          <div class="col s12 m8 l10" style={{ marginTop: '7%' }}>
             <NewIssueForm />
           </div>
         </div>
@@ -110,14 +116,22 @@ const App = (props) => {
 
   if (isIssueView) {
     content = (
-      <>
-        <ProjectHome
-          clickProjectHomeHandler={clickProjectHomeHandler}
-          clickDashboardHandler={clickDashboardHandler}
-          clickNewIssueViewHandler={clickNewIssueViewHandler}
-          clickIssueViewHandler={clickIssueViewHandler}
-        />
-      </>
+      <div class="row">
+        <ProjectHeader class="col s12 m4 l1">
+          <div>Test Project Name</div>
+        </ProjectHeader>
+        <div class="col s12 m4 l1">
+          <ProjectHome
+            clickProjectHomeHandler={clickProjectHomeHandler}
+            clickDashboardHandler={clickDashboardHandler}
+            clickNewIssueViewHandler={clickNewIssueViewHandler}
+            clickIssueViewHandler={clickIssueViewHandler}
+          />
+        </div>
+        <div class="col s12 m8 l11" style={{ marginTop: '7%' }}>
+          <ProjectIssuesListContainer />
+        </div>
+      </div>
     );
   }
 
