@@ -10,6 +10,11 @@ const ProjectListEntry = (props) => {
     setIsHovered(value);
   };
 
+  const clickHandler = () => {
+    props.getAllIssuesByProject(props.project);
+    props.clickProjectHomeHandler();
+  };
+
   let content = (
     <ul className="collapsible" style={{ marginBottom: '.5rem' }}>
       <li>
@@ -25,11 +30,13 @@ const ProjectListEntry = (props) => {
             </i>
           </div>
           <Row className={isHovered ? 'row white-text' : 'row black-text'}>
-            <div className="col s1" style={{ cursor: 'pointer' }} onClick={() => props.clickProjectHomeHandler()}>{props.project.name}</div>
+            <div className="col s1" style={{ cursor: 'pointer' }} onClick={clickHandler}>{props.project.name}</div>
             {
               isHovered
                 ? (
                   <ProjectListButtons
+                    project={props.project}
+                    getAllIssuesByProject={props.getAllIssuesByProject}
                     clickIssueViewHandler={props.clickIssueViewHandler}
                     clickNewIssueViewHandler={props.clickNewIssueViewHandler}
                   />

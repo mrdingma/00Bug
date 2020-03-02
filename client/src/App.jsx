@@ -18,7 +18,7 @@ const App = (props) => {
   const [isProjectHomeView, setIsProjectHomeView] = useState(false);
   const [isNewIssueView, setIsNewIssueView] = useState(false);
   const [isIssueView, setIsIssueView] = useState(false);
-  const [currentProject, setCurrentProject] = useState({});
+  const [issuesByProject, setissuesByProject] = useState(null);
 
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
@@ -48,6 +48,17 @@ const App = (props) => {
     setIsIssueView(false);
   };
 
+  const getAllIssuesByProject = (proj) => {
+    // get the selected project
+    const id = proj.id;
+    const url = '/issues?project=:projectid';
+    // axios.get()
+
+
+    // do an axios request for issues for that project
+
+  }
+
   // useEffect(() => {
   //   axios.get
   // })
@@ -65,6 +76,7 @@ const App = (props) => {
         <div className="row">
           <ProjectList
             projects={allProjects}
+            getAllIssuesByProject={getAllIssuesByProject}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickIssueViewHandler={clickIssueViewHandler}
             clickNewIssueViewHandler={clickNewIssueViewHandler}
@@ -82,6 +94,7 @@ const App = (props) => {
     content = (
       <>
         <ProjectHome
+          issuesByProject={allIssuesForProject}
           clickProjectHomeHandler={clickProjectHomeHandler}
           clickDashboardHandler={clickDashboardHandler}
           clickNewIssueViewHandler={clickNewIssueViewHandler}
