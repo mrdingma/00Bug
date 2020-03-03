@@ -17,23 +17,14 @@ const IssuesListEntry = ({ issue }) => {
     other: '#3B9DBD',
   };
 
-  // 1 low 2 med 3 high
   const priorityIconMapper = {
     1: 'arrow_downward',
     2: 'arrow_forward',
     3: 'arrow_upward',
   };
 
-  /*
-            <th scope="col">Created</th>
-            <th scope="col">Due date</th>
-            <th scope="col">Updated</th>
-            <th scope="col">Registered by</th>
-            <th scope="col">Attachment</th>
-  */
-
   const dateConverter = (d) => {
-    return date.format(d, 'MMM. D, YYYY');
+    return date.format(new Date(d), 'MMM. D, YYYY');
   };
 
 
@@ -45,13 +36,14 @@ const IssuesListEntry = ({ issue }) => {
         <td>{issue.assignee.name ? issue.assignee.name : ''}</td>
         <td><Status className="white-text" color={statusColorMapper[issue.status]}>{issue.status}</Status></td>
         <td><i className="material-icons">{priorityIconMapper[issue.priority]}</i></td>
-        <td>{dateConverter(issue.created)}</td>
-        <td>{issue.dueDate === '' ? '' : dateConverter(issue.dueDate)}</td>
-        <td>{issue.updateDate === '' ? '' : dateConverter(issue.updateDate)}</td>
+        <td>{dateConverter(issue.created_date)}</td>
+        <td>{issue.due_date === '' ? '' : dateConverter(issue.due_date)}</td>
+        {/* <td>{issue.updateDate === '' ? '' : dateConverter(issue.updateDate)}</td> */}
+        <td></td>
         <td>{issue.assigner.name}</td>
         <td>
           {
-            issue.attachments.length === 0
+            issue.attachments[0] === ''
               ? ''
               : <i className="material-icons">attach_file</i>
           }

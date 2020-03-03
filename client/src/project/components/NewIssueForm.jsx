@@ -35,6 +35,7 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
       type,
       description,
       assignee: { name: assignee },
+      assigner: { name: 'Dean Ma' },
       attachments: [attachment],
     };
     addIssue(data);
@@ -83,7 +84,7 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
                 <div style={{ paddingLeft: '24px' }}>
                   <select className="selectTask" onChange={(e) => setAssignee(e.target.value)}>
                     <option value=" " />
-                    <option value="userId">Dean Ma</option>
+                    <option value="Dean Ma">Dean Ma</option>
                   </select>
                 </div>
               </div>

@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react';
 import IssuesListEntry from './IssuesListEntry.jsx';
 
 const ProjectIssuesListContainer = (props) => {
-  // const [isClicked, setIsClicked] = useState(false);
-
-  // const onClickHandler = () => {
-  //   setIsClicked(!isClicked);
-  // };
-
 
   let content = (
     <div className="responsive-table collapsible">

@@ -154,7 +154,6 @@ const App = (props) => {
         <Header addProject={addProject} />
         <div className="row">
           <ProjectList
-            // projects={allProjects}
             projects={projectList}
             getAllIssuesByProject={getAllIssuesByProject}
             clickProjectHomeHandler={clickProjectHomeHandler}
@@ -164,8 +163,7 @@ const App = (props) => {
           <RecentUpdatesContainer />
         </div>
         <div className="row">
-          <IssuesListContainer issues={allIssues} />
-          {/* <IssuesListContainer issues={issuesList} /> */}
+          <IssuesListContainer issues={issuesList} />
         </div>
       </>
     );
@@ -176,7 +174,6 @@ const App = (props) => {
       <>
         <ProjectHome
           issuesByProject={allIssuesForProject}
-          // issuesByProject={issuesByProject}
           clickProjectHomeHandler={clickProjectHomeHandler}
           clickDashboardHandler={clickDashboardHandler}
           clickNewIssueViewHandler={clickNewIssueViewHandler}
@@ -225,8 +222,7 @@ const App = (props) => {
           />
         </div>
         <div class="col s12 m8 l11" style={{ marginTop: '7%' }}>
-          <ProjectIssuesListContainer issuesByProject={allIssuesForProject} />
-          {/* <ProjectIssuesListContainer issuesByProject={issuesByProject} /> */}
+          <ProjectIssuesListContainer issuesByProject={issuesByProject} />
         </div>
       </div>
     );
