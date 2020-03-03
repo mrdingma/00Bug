@@ -21,10 +21,9 @@ const App = (props) => {
   const [isIssueView, setIsIssueView] = useState(false);
   const [currentProject, setCurrentProject] = useState('');
 
-  // const [issuesByProject, setIssuesByProject] = useState(null);
-  const [issuesByProject, setIssuesByProject] = useState([]);
-  const [projectList, setProjectList] = useState([]);
-  const [issuesList, setIssuesList] = useState([]);
+  const [issuesByProject, setIssuesByProject] = useState(null);
+  const [projectList, setProjectList] = useState(null);
+  const [issuesList, setIssuesList] = useState(null);
 
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
@@ -143,12 +142,24 @@ const App = (props) => {
   }, []);
 
   let content = (
-    <div className="progress">
-      <div className="indeterminate" />
+    <div className="row">
+      <div className="container">
+        <div className="spinner-layer spinner-green">
+          <div className="circle-clipper left">
+            <div className="circle" />
+          </div>
+          <div className="gap-patch">
+            <div className="circle" />
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 
-  if (isDashboardView) {
+  if (isDashboardView && projectList !== null && issuesList !== null) {
     content = (
       <>
         <Header addProject={addProject} />
