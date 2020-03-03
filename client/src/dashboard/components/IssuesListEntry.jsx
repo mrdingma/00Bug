@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Status from '../elements/status';
+import date from 'date-and-time';
 
 const IssuesListEntry = ({ issue }) => {
 
@@ -15,11 +16,15 @@ const IssuesListEntry = ({ issue }) => {
     3: 'arrow_upward',
   };
 
+  const dateParse = (d) => {
+    return date.format(new Date(d), 'MMM. D');
+  };
+
   const content = (
     <tr>
       <td><Status className="white-text" color={statusColorMapper[issue.status]}>{issue.status}</Status></td>
       <td><i className="material-icons">{priorityMapper[issue.priority]}</i></td>
-      <td>{issue.dueDate}</td>
+      <td>{dateParse(issue.due_date)}</td>
       <td>{issue.subject}</td>
     </tr>
   );
