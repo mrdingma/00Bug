@@ -19,7 +19,8 @@ const App = (props) => {
   const [isNewIssueView, setIsNewIssueView] = useState(false);
   const [isIssueView, setIsIssueView] = useState(false);
   const [currentProject, setCurrentProject] = useState('');
-  const [issuesByProject, setIssuesByProject] = useState(null);
+  // const [issuesByProject, setIssuesByProject] = useState(null);
+  const [issuesByProject, setIssuesByProject] = useState([]);
 
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
