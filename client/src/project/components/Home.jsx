@@ -3,12 +3,6 @@ import React, { useEffect, useState } from 'react';
 import SideBarContainer from './SideBarContainer.jsx';
 
 const Home = (props) => {
-  // const [isClicked, setIsClicked] = useState(false);
-
-  // const onClickHandler = () => {
-  //   setIsClicked(!isClicked);
-  // };
-
 
 
   let content = (
