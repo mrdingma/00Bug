@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { DatePicker } from 'react-materialize';
 import FormBody from '../elements/formBody';
-import date from 'date-and-time';
+// import date from 'date-and-time';
 
-const NewIssueForm = (props) => {
+const NewIssueForm = ({ currentProject, addIssue }) => {
   const [subject, setSubject] = useState('');
   const [type, setType] = useState('task');
   const [description, setDescription] = useState('');
@@ -18,9 +18,28 @@ const NewIssueForm = (props) => {
     M.textareaAutoResize($('#textarea1'));
   });
 
-  const dueDateHandler = (e) => {
-    setDueDate(date.format(e, 'YYYY-MM-DD'));
+
+  const clickHandler = () => {
+    const data = {
+      userId: 1,
+      project: currentProject,
+      status: 'open',
+      due_date: dueDate,
+      summary: subject,
+      subject,
+      priority,
+      type,
+      description,
+      assignee: { name: assignee },
+      attachments: [attachment],
+    };
+    console.log(data);
+    addIssue(data);
   };
+
+  // const dueDateHandler = (e) => {
+  //   setDueDate(date.format(e, 'YYYY-MM-DD'));
+  // };
 
   let content = (
     <>
@@ -70,9 +89,9 @@ const NewIssueForm = (props) => {
                 <div style={{ paddingLeft: '24px' }}>
                   <select className="selectTask" onChange={(e) => setPriority(e.target.value)}>
                     <option value=" " />
-                    <option value="low">Low</option>
-                    <option value="normal">Normal</option>
-                    <option value="high">High</option>
+                    <option value={1}>Low</option>
+                    <option value={2}>Normal</option>
+                    <option value={3}>High</option>
                   </select>
                 </div>
               </div>
@@ -82,7 +101,7 @@ const NewIssueForm = (props) => {
                   <DatePicker
                     value={dueDate}
                     id="myDate"
-                    onChange={(e) => dueDateHandler(e)}
+                    onChange={(d) => setDueDate(d)}
                   />
                 </div>
               </div>
@@ -102,7 +121,7 @@ const NewIssueForm = (props) => {
                 </div>
               </div>
               <div className="col s5 offset-s2" style={{ paddingLeft: '17%', paddingTop: '3%' }}>
-                <a class="waves-effect btn">Add</a>
+                <a class="waves-effect btn" onClick={clickHandler}>Add</a>
               </div>
             </FormBody>
           </div>
