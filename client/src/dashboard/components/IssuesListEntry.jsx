@@ -17,7 +17,7 @@ const IssuesListEntry = ({ issue }) => {
   };
 
   const dateParse = (d) => {
-    return date.format(new Date(d), 'MMM. D');
+    return d === null ? '' : date.format(new Date(d), 'MMM. D');
   };
 
   const content = (
@@ -25,7 +25,7 @@ const IssuesListEntry = ({ issue }) => {
       <td><Status className="white-text" color={statusColorMapper[issue.status]}>{issue.status}</Status></td>
       <td><i className="material-icons">{priorityMapper[issue.priority]}</i></td>
       <td>{dateParse(issue.due_date)}</td>
-      <td>{issue.subject}</td>
+      <td>{issue.summary}</td>
     </tr>
   );
 

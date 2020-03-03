@@ -27,18 +27,16 @@ const IssuesListEntry = ({ issue }) => {
     return date.format(new Date(d), 'MMM. D, YYYY');
   };
 
-
   const content = (
     <>
       <tr>
         <td><Status className="white-text" color={typeColorMapper[issue.type]}>{issue.type}</Status></td>
-        <td>{issue.subject}</td>
+        <td>{issue.summary}</td>
         <td>{issue.assignee.name ? issue.assignee.name : ''}</td>
         <td><Status className="white-text" color={statusColorMapper[issue.status]}>{issue.status}</Status></td>
         <td><i className="material-icons">{priorityIconMapper[issue.priority]}</i></td>
         <td>{dateConverter(issue.created_date)}</td>
-        <td>{issue.due_date === '' ? '' : dateConverter(issue.due_date)}</td>
-        {/* <td>{issue.updateDate === '' ? '' : dateConverter(issue.updateDate)}</td> */}
+        <td>{issue.due_date === null ? '' : dateConverter(issue.due_date)}</td>
         <td></td>
         <td>{issue.assigner.name}</td>
         <td>
