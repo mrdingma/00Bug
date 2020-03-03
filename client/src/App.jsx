@@ -88,7 +88,6 @@ const App = (props) => {
 
     axios.get(url)
       .then(({ data }) => {
-        console.log(data);
         setIssuesList(data);
       })
       .catch((err) => {
@@ -103,7 +102,6 @@ const App = (props) => {
 
     axios.get(url)
       .then(({ data }) => {
-        console.log(data);
         setIssuesByProject(data);
       })
       .catch((err) => {
