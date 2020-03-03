@@ -9,6 +9,7 @@ import NewIssueForm from './project/components/NewIssueForm.jsx';
 import ProjectHeader from './project/elements/projectHeader';
 import ProjectIssuesListContainer from './project/components/ProjectIssuesListContainer.jsx';
 
+// dummy data:
 import allProjects from './allProjects';
 import allIssues from './allissues';
 import allIssuesForProject from './allIssuesForProject';
