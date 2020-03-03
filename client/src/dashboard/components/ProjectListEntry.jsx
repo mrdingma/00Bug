@@ -29,8 +29,8 @@ const ProjectListEntry = (props) => {
               business
             </i>
           </div>
-          <Row className={isHovered ? 'row white-text' : 'row black-text'}>
-            <div className="col s1" style={{ cursor: 'pointer' }} onClick={clickHandler}>{props.project.name}</div>
+          <Row className={isHovered ? 'row white-text' : 'row black-text'} style={{ width: '100%' }}>
+            <div className="col s1" style={{ cursor: 'pointer', width: '100%' }} onClick={clickHandler}>{props.project.name}</div>
             {
               isHovered
                 ? (
