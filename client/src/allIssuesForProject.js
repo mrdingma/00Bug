@@ -4,6 +4,7 @@ module.exports = [
     project: 'project1',
     status: 'open',
     dueDate: '2020/03/01',
+    updateDate: '',
     summary: 'summary1',
     subject: 'hi this is a sentence',
     priority: 2,
@@ -27,6 +28,6 @@ module.exports = [
     description: 'something is wrong',
     assignee: { id: 1, name: 'Dean Ma' },
     assigner: { id: 1, name: 'Dean Ma' },
-    attachments: [],
+    attachments: [1],
   },
 ];

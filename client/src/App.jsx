@@ -18,7 +18,8 @@ const App = (props) => {
   const [isProjectHomeView, setIsProjectHomeView] = useState(false);
   const [isNewIssueView, setIsNewIssueView] = useState(false);
   const [isIssueView, setIsIssueView] = useState(false);
-  const [issuesByProject, setissuesByProject] = useState(null);
+  const [currentProject, setCurrentProject] = useState('');
+  const [issuesByProject, setIssuesByProject] = useState(null);
 
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
@@ -49,7 +50,7 @@ const App = (props) => {
   };
 
   const getAllIssuesByProject = (proj) => {
-    // get the selected project
+    setCurrentProject(proj.name);
     const id = proj.id;
     const url = '/issues?project=:projectid';
     // axios.get()
@@ -104,12 +105,12 @@ const App = (props) => {
     );
   }
 
-  if (isNewIssueView) {
+  if (isNewIssueView && issuesByProject !== null) {
     content = (
       <>
         <div class="row">
           <ProjectHeader class="col s12 m4 l1">
-            <div>Test Project Name</div>
+            <div>{currentProject}</div>
           </ProjectHeader>
           <div class="col s12 m4 l1">
             <ProjectHome
@@ -127,11 +128,12 @@ const App = (props) => {
     );
   }
 
-  if (isIssueView) {
+
+  if (isIssueView && issuesByProject !== null) {
     content = (
       <div class="row">
         <ProjectHeader class="col s12 m4 l1">
-          <div>Test Project Name</div>
+          <div>{currentProject}</div>
         </ProjectHeader>
         <div class="col s12 m4 l1">
           <ProjectHome
@@ -142,12 +144,11 @@ const App = (props) => {
           />
         </div>
         <div class="col s12 m8 l11" style={{ marginTop: '7%' }}>
-          <ProjectIssuesListContainer />
+          <ProjectIssuesListContainer issuesByProject={allIssuesForProject} />
         </div>
       </div>
     );
   }
-
 
   return content;
 };

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Status from '../../dashboard/elements/status';
+import date from 'date-and-time';
 
-const IssuesListEntry = (props) => {
+const IssuesListEntry = ({ issue }) => {
 
   const statusColorMapper = {
     open: '#ED8077',
@@ -16,31 +17,41 @@ const IssuesListEntry = (props) => {
     other: '#3B9DBD',
   };
 
+  // 1 low 2 med 3 high
+  const priorityIconMapper = {
+    1: 'arrow_downward',
+    2: 'arrow_forward',
+    3: 'arrow_upward',
+  };
+
+  /*
+            <th scope="col">Created</th>
+            <th scope="col">Due date</th>
+            <th scope="col">Updated</th>
+            <th scope="col">Registered by</th>
+            <th scope="col">Attachment</th>
+  */
+
+
   const content = (
     <>
       <tr>
-        <td><Status className="white-text" color={typeColorMapper.other}>Other</Status></td>
-        <td>subject asasdhasdhadshahassdhs</td>
-        <td>Assignee</td>
-        <td><Status className="white-text" color={statusColorMapper.open}>Open</Status></td>
-        <td><i className="material-icons">arrow_downward</i></td>
-        <td>Mar. 18</td>
-        <td>Mar. 18</td>
-        <td>Mar. 18</td>
-        <td>Dean Ma</td>
-        <td><i className="material-icons">attach_file</i></td>
-      </tr>
-      <tr>
-        <td><Status className="white-text" color={typeColorMapper.other}>Other</Status></td>
-        <td>subject asasdhasdhadshahassdhs</td>
-        <td>Assignee</td>
-        <td><Status className="white-text" color={statusColorMapper.open}>Open</Status></td>
-        <td><i className="material-icons">arrow_downward</i></td>
-        <td>Mar. 18</td>
-        <td>Mar. 18</td>
-        <td>Mar. 18</td>
-        <td>Dean Ma</td>
-        <td><i className="material-icons">attach_file</i></td>
+        <td><Status className="white-text" color={typeColorMapper[issue.type]}>{issue.type}</Status></td>
+        <td>{issue.subject}</td>
+        <td>{issue.assignee.name ? issue.assignee.name : ''}</td>
+        <td><Status className="white-text" color={statusColorMapper[issue.status]}>{issue.status}</Status></td>
+        <td><i className="material-icons">{priorityIconMapper[issue.priority]}</i></td>
+        <td>{date.parse(issue.created, 'MMM. D, YYYY')}</td>
+        <td>{issue.dueDate === '' ? '' : date.parse(issue.dueDate, 'MMM. D, YYYY')}</td>
+        <td>{issue.updateDate === '' ? '' : date.parse(issue.updateDate, 'MMM. D, YYYY')}</td>
+        <td>{issue.assigner.name}</td>
+        <td>
+          {
+            issue.attachments.length === 0
+              ? ''
+              : <i className="material-icons">attach_file</i>
+          }
+        </td>
       </tr>
     </>
   );
