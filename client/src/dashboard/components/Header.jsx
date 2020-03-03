@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import { Modal } from 'react-materialize';
+import AddProject from './AddProject.jsx';
 
 const Header = (props) => {
   useEffect(() => {
     const elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems, { hover: true });
   });
+
+  const trigger = <li><a>Add Project</a></li>;
 
   const content = (
     <div>
@@ -23,13 +27,16 @@ const Header = (props) => {
                 <i className="material-icons black-text">add</i>
               </a>
               <ul id='dropdown1' className='dropdown-content'>
-                <li><a>Add Project</a></li>
+                <Modal header="Add Project" actions={[]} trigger={trigger}>
+                  <AddProject />
+                </Modal>
                 <li><a>Add User</a></li>
               </ul>
             </li>
           </ul>
         </div>
       </nav>
+
     </div>
   );
 
