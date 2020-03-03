@@ -60,7 +60,6 @@ const App = (props) => {
 
     axios.get(url)
       .then(({ data }) => {
-        console.log(data);
         setProjectList(data);
       })
       .catch((err) => {
@@ -138,6 +137,10 @@ const App = (props) => {
       });
   };
 
+  useEffect(() => {
+    getAllProjects();
+    getAllIssues();
+  }, []);
 
   let content = (
     <div className="progress">
@@ -199,7 +202,7 @@ const App = (props) => {
             />
           </div>
           <div class="col s12 m8 l10" style={{ marginTop: '7%' }}>
-            <NewIssueForm />
+            <NewIssueForm currentProject={currentProject} addIssue={addIssue} />
           </div>
         </div>
       </>
