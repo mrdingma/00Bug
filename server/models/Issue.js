@@ -8,7 +8,6 @@ const IssueSchema = new Schema({
   status: String,
   due_date: Date,
   summary: String,
-  subject: String,
   priority: Number,
   type: String,
   created_date: {
