@@ -1,9 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import { Modal } from 'react-materialize';
-import AddProject from './AddProject.jsx';
+import { Modal, TextInput, Button } from 'react-materialize';
 
-const Header = (props) => {
+const Header = ({ addProject }) => {
+  const [projectName, setProjectName] = useState('');
+
+  const handleSubmit = () => {
+    if (projectName !== '') {
+      addProject(projectName);
+      setProjectName('');
+    }
+  };
+
   useEffect(() => {
     const elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems, { hover: true });
@@ -27,8 +35,14 @@ const Header = (props) => {
                 <i className="material-icons black-text">add</i>
               </a>
               <ul id='dropdown1' className='dropdown-content'>
-                <Modal header="Add Project" actions={[]} trigger={trigger}>
-                  <AddProject />
+                <Modal
+                  header="Add Project"
+                  actions={[
+                    <Button flat modal="close" node="button" waves="green" onClick={handleSubmit}>Submit</Button>,
+                  ]}
+                  trigger={trigger}
+                >
+                  <TextInput value={projectName} placeholder="Name" onChange={(e) => setProjectName(e.target.value)} />
                 </Modal>
                 <li><a>Add User</a></li>
               </ul>

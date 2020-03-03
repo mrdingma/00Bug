@@ -10,7 +10,7 @@ import ProjectHeader from './project/elements/projectHeader';
 import ProjectIssuesListContainer from './project/components/ProjectIssuesListContainer.jsx';
 
 // dummy data:
-import allProjects from './allProjects';
+// import allProjects from './allProjects';
 import allIssues from './allissues';
 import allIssuesForProject from './allIssuesForProject';
 
@@ -148,11 +148,11 @@ const App = (props) => {
   if (isDashboardView) {
     content = (
       <>
-        <Header />
+        <Header addProject={addProject} />
         <div className="row">
           <ProjectList
-            projects={allProjects}
-            // projects={projectList}
+            // projects={allProjects}
+            projects={projectList}
             getAllIssuesByProject={getAllIssuesByProject}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickIssueViewHandler={clickIssueViewHandler}
