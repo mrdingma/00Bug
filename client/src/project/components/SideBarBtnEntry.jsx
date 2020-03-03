@@ -7,14 +7,20 @@ const SideBarBtnEntry = ({ type, clickIssueViewHandler, clickProjectHomeHandler,
     setIsHovered(value);
   };
 
+  const typeToText = {
+    home: 'Home',
+    add: 'Add Issue',
+    storage: 'Issues',
+  };
+
   const onClickHandler = (e) => {
-    if (e.target.name === 'home' || e.target.innerText === 'home') {
+    if (e.target.name === 'home' || e.target.innerText.toLowerCase().includes('home')) {
       clickProjectHomeHandler();
     }
-    if (e.target.name === 'add' || e.target.innerText === 'add') {
+    if (e.target.name === 'add' || e.target.innerText.toLowerCase().includes('add')) {
       clickNewIssueViewHandler();
     }
-    if (e.target.name === 'storage' || e.target.innerText === 'storage') {
+    if (e.target.name === 'storage' || e.target.innerText.toLowerCase().includes('storage')) {
       clickIssueViewHandler();
     }
   };
@@ -34,6 +40,9 @@ const SideBarBtnEntry = ({ type, clickIssueViewHandler, clickProjectHomeHandler,
       >
         {type}
       </i>
+      <div className="sidebtnTxt" style={{ color: isHovered ? '#4CAF93' : 'white' }}>
+        {typeToText[type]}
+      </div>
     </li>
   );
 

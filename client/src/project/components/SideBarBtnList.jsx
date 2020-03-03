@@ -19,6 +19,7 @@ const SideBarBtnList = ({ clickIssueViewHandler, clickProjectHomeHandler, clickD
         onClick={() => clickDashboardHandler()}
       >
         <i className="sideIcon material-icons" style={{ color: isHovered ? '#4CAF93' : 'white' }}>business</i>
+        <div className="sidebtnTxt" style={{ color: isHovered ? '#4CAF93' : 'white' }}>Dashboard</div>
       </li>
       <li><div className="divider" style={{ margin: '0' }} /></li>
       {

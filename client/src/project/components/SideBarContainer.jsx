@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import SideBarBtnList from './SideBarBtnList.jsx';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import SideBarBtnList from './SideBarBtnList.jsx';
 
 // TODO: highlight current button
 
@@ -23,6 +23,6 @@ const SideBarContainer = ({ clickIssueViewHandler, clickProjectHomeHandler, clic
       </ul>
     </>
   );
-}
+};
 
 export default SideBarContainer;
