@@ -13,9 +13,13 @@ const ProjectListButtons = (props) => {
     setIsHovered2(value);
   };
 
-  const clickHandler = () => {
+  const clickHandler = (toggle) => {
     props.getAllIssuesByProject(props.project);
-    props.clickIssueViewHandler();
+    if (toggle === 1) {
+      props.clickNewIssueViewHandler();
+    } else {
+      props.clickIssueViewHandler();
+    }
   };
 
   let content = (
@@ -24,7 +28,7 @@ const ProjectListButtons = (props) => {
         style={{ backgroundColor: isHovered1 ? 'rgba(255,255,255,.2)' : '#4CAF93', cursor: 'pointer' }}
         onMouseEnter={() => hoverHandler1(true)}
         onMouseLeave={() => hoverHandler1(false)}
-        onClick={clickHandler}
+        onClick={() => clickHandler(1)}
       >
         Add Issue
       </div>
@@ -33,7 +37,7 @@ const ProjectListButtons = (props) => {
         style={{ backgroundColor: isHovered2 ? 'rgba(255,255,255,.2)' : '#4CAF93', cursor: 'pointer' }}
         onMouseEnter={() => hoverHandler2(true)}
         onMouseLeave={() => hoverHandler2(false)}
-        onClick={clickHandler}
+        onClick={() => clickHandler(2)}
       >
         Issues
       </div>
