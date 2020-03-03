@@ -30,7 +30,6 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
       status: 'open',
       due_date: dueDate,
       summary: subject,
-      subject,
       priority,
       type,
       description,
