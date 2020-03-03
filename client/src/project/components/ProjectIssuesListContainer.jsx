@@ -28,7 +28,7 @@ const ProjectIssuesListContainer = (props) => {
         </thead>
         <tbody>
           {
-            props.issuesByProject.map((issue) => <IssuesListEntry issue={issue} />)
+            props.issuesByProject.map((issue) => <IssuesListEntry key={issue.id} issue={issue} />)
           }
         </tbody>
       </table>

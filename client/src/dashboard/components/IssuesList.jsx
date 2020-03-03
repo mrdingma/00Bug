@@ -17,7 +17,7 @@ const IssuesList = (props) => {
           {
             props.issues.map((issue) => {
               if (issue.status !== 'closed') {
-                return <IssuesListEntry issue={issue} />;
+                return <IssuesListEntry key={issue.id} issue={issue} />;
               }
               return null;
             })

@@ -24,6 +24,7 @@ const SideBarBtnList = ({ clickIssueViewHandler, clickProjectHomeHandler, clickD
       {
         buttonTypes.map((type) => (
           <SideBarBtnEntry
+            key={type}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickNewIssueViewHandler={clickNewIssueViewHandler}
             clickIssueViewHandler={clickIssueViewHandler}

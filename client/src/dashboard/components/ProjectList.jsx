@@ -33,6 +33,7 @@ const ProjectList = (props) => {
             {
               props.projects.map((project) => (
                 <ProjectListListEntry
+                  key={project.id}
                   project={project}
                   getAllIssuesByProject={props.getAllIssuesByProject}
                   clickProjectHomeHandler={props.clickProjectHomeHandler}
