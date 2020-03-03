@@ -32,6 +32,10 @@ const IssuesListEntry = ({ issue }) => {
             <th scope="col">Attachment</th>
   */
 
+  const dateConverter = (d) => {
+    return date.format(d, 'MMM. D, YYYY');
+  };
+
 
   const content = (
     <>
@@ -41,9 +45,9 @@ const IssuesListEntry = ({ issue }) => {
         <td>{issue.assignee.name ? issue.assignee.name : ''}</td>
         <td><Status className="white-text" color={statusColorMapper[issue.status]}>{issue.status}</Status></td>
         <td><i className="material-icons">{priorityIconMapper[issue.priority]}</i></td>
-        <td>{date.parse(issue.created, 'MMM. D, YYYY')}</td>
-        <td>{issue.dueDate === '' ? '' : date.parse(issue.dueDate, 'MMM. D, YYYY')}</td>
-        <td>{issue.updateDate === '' ? '' : date.parse(issue.updateDate, 'MMM. D, YYYY')}</td>
+        <td>{dateConverter(issue.created)}</td>
+        <td>{issue.dueDate === '' ? '' : dateConverter(issue.dueDate)}</td>
+        <td>{issue.updateDate === '' ? '' : dateConverter(issue.updateDate)}</td>
         <td>{issue.assigner.name}</td>
         <td>
           {
