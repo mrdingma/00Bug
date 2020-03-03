@@ -75,7 +75,6 @@ const App = (props) => {
 
     axios.post(url, params)
       .then(({ data }) => {
-        console.log(data);
         setProjectList([...projectList, data]);
       })
       .catch((err) => {
