@@ -8,15 +8,37 @@ td, th {
   background-color: #4CAF93;
 }
 
+.sidenav:hover {
+  width: 110px !important;
+}
+
 .sideIcon {
   margin-top: 8px !important;
   margin-left: 8px !important;
+}
+
+.sidebtn {
+  position: relative;
+  transition: 0.7s;
 }
 
 .sidebtn:hover {
   background-color: white;
 }
 
+.sidebtnTxt {
+  position: absolute;
+  display: inline-block;
+  left: 40px;
+  font-size: 11px;
+  font-weight: 400;
+}
+
 .menu {
   color: #4CAF93;
+}
+
+.sidenav-trigger {
+  position: absolute;
+  z-index: 3 !important;
 }
