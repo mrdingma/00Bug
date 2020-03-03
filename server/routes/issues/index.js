@@ -17,7 +17,7 @@ module.exports = () => {
   // GET issues by userId and projectId
   router.get('/user/:userid/project/:projectName', async (req, res, next) => {
     try {
-      const issues = await issue_controller.getAllByUserAndProject(req.params.userid, req.params.projectName);
+      const issues = await issue_controller.getAllByUserAndProject(Number(req.params.userid), req.params.projectName);
       return res.send(issues);
     } catch (err) {
       return next(err);
