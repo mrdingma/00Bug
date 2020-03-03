@@ -9,10 +9,6 @@ import NewIssueForm from './project/components/NewIssueForm.jsx';
 import ProjectHeader from './project/elements/projectHeader';
 import ProjectIssuesListContainer from './project/components/ProjectIssuesListContainer.jsx';
 
-// dummy data:
-// import allProjects from './allProjects';
-import allIssues from './allissues';
-import allIssuesForProject from './allIssuesForProject';
 
 const App = (props) => {
   const [isDashboardView, setIsDashboardView] = useState(true);
@@ -20,10 +16,14 @@ const App = (props) => {
   const [isNewIssueView, setIsNewIssueView] = useState(false);
   const [isIssueView, setIsIssueView] = useState(false);
   const [currentProject, setCurrentProject] = useState('');
-
   const [issuesByProject, setIssuesByProject] = useState(null);
   const [projectList, setProjectList] = useState(null);
   const [issuesList, setIssuesList] = useState(null);
+  const [currentTab, setCurrentTab] = useState('dashboard');
+
+  const switchTabHandler = (page) => {
+    setCurrentTab(page);
+  };
 
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
@@ -162,6 +162,7 @@ const App = (props) => {
         <Header addProject={addProject} />
         <div className="row">
           <ProjectList
+            setCurrentTab={setCurrentTab}
             projects={projectList}
             getAllIssuesByProject={getAllIssuesByProject}
             clickProjectHomeHandler={clickProjectHomeHandler}
@@ -180,13 +181,24 @@ const App = (props) => {
   if (isProjectHomeView) {
     content = (
       <>
-        <ProjectHome
-          issuesByProject={allIssuesForProject}
-          clickProjectHomeHandler={clickProjectHomeHandler}
-          clickDashboardHandler={clickDashboardHandler}
-          clickNewIssueViewHandler={clickNewIssueViewHandler}
-          clickIssueViewHandler={clickIssueViewHandler}
-        />
+        <div class="row">
+          <ProjectHeader class="col s12 m4 l1">
+            <div>{currentProject}</div>
+          </ProjectHeader>
+          <div class="col s12 m4 l1">
+            <ProjectHome
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+              clickProjectHomeHandler={clickProjectHomeHandler}
+              clickDashboardHandler={clickDashboardHandler}
+              clickNewIssueViewHandler={clickNewIssueViewHandler}
+              clickIssueViewHandler={clickIssueViewHandler}
+            />
+          </div>
+          <div class="col s12 m8 l10" style={{ marginTop: '7%' }}>
+            <RecentUpdatesContainer />
+          </div>
+        </div>
       </>
     );
   }
@@ -200,6 +212,8 @@ const App = (props) => {
           </ProjectHeader>
           <div class="col s12 m4 l1">
             <ProjectHome
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
               clickProjectHomeHandler={clickProjectHomeHandler}
               clickDashboardHandler={clickDashboardHandler}
               clickNewIssueViewHandler={clickNewIssueViewHandler}
@@ -223,6 +237,8 @@ const App = (props) => {
         </ProjectHeader>
         <div class="col s12 m4 l1">
           <ProjectHome
+            currentTab={currentTab}
+            setCurrentTab={setCurrentTab}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickDashboardHandler={clickDashboardHandler}
             clickNewIssueViewHandler={clickNewIssueViewHandler}

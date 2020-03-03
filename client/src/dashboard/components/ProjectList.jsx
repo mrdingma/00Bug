@@ -33,6 +33,7 @@ const ProjectList = (props) => {
             {
               props.projects.map((project) => (
                 <ProjectListListEntry
+                  setCurrentTab={props.setCurrentTab}
                   key={project.id}
                   project={project}
                   getAllIssuesByProject={props.getAllIssuesByProject}

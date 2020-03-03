@@ -16,8 +16,10 @@ const ProjectListButtons = (props) => {
   const clickHandler = (toggle) => {
     props.getAllIssuesByProject(props.project);
     if (toggle === 1) {
+      props.setCurrentTab('new_issue');
       props.clickNewIssueViewHandler();
     } else {
+      props.setCurrentTab('issue_list');
       props.clickIssueViewHandler();
     }
   };

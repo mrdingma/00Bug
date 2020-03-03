@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SideBarBtnEntry from './SideBarBtnEntry.jsx';
 
-const SideBarBtnList = ({ clickIssueViewHandler, clickProjectHomeHandler, clickDashboardHandler, clickNewIssueViewHandler }) => {
+const SideBarBtnList = ({ currentTab, setCurrentTab, clickIssueViewHandler, clickProjectHomeHandler, clickDashboardHandler, clickNewIssueViewHandler }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const hoverHandler = (value) => {
@@ -26,6 +26,8 @@ const SideBarBtnList = ({ clickIssueViewHandler, clickProjectHomeHandler, clickD
         buttonTypes.map((type) => (
           <SideBarBtnEntry
             key={type}
+            currentTab={currentTab}
+            setCurrentTab={setCurrentTab}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickNewIssueViewHandler={clickNewIssueViewHandler}
             clickIssueViewHandler={clickIssueViewHandler}

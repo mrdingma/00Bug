@@ -4,7 +4,7 @@ import SideBarBtnList from './SideBarBtnList.jsx';
 
 // TODO: highlight current button
 
-const SideBarContainer = ({ clickIssueViewHandler, clickProjectHomeHandler, clickDashboardHandler, clickNewIssueViewHandler }) => {
+const SideBarContainer = (props) => {
   useEffect(() => {
     const sidenav = document.querySelectorAll('.sidenav');
     M.Sidenav.init(sidenav, {});
@@ -15,10 +15,12 @@ const SideBarContainer = ({ clickIssueViewHandler, clickProjectHomeHandler, clic
       <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="menu material-icons">menu</i></a>
       <ul id="slide-out" className="sidenav sidenav-fixed">
         <SideBarBtnList
-          clickProjectHomeHandler={clickProjectHomeHandler}
-          clickDashboardHandler={clickDashboardHandler}
-          clickNewIssueViewHandler={clickNewIssueViewHandler}
-          clickIssueViewHandler={clickIssueViewHandler}
+          currentTab={props.currentTab}
+          setCurrentTab={props.setCurrentTab}
+          clickProjectHomeHandler={props.clickProjectHomeHandler}
+          clickDashboardHandler={props.clickDashboardHandler}
+          clickNewIssueViewHandler={props.clickNewIssueViewHandler}
+          clickIssueViewHandler={props.clickIssueViewHandler}
         />
       </ul>
     </>

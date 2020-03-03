@@ -11,6 +11,7 @@ const ProjectListEntry = (props) => {
   };
 
   const clickHandler = () => {
+    props.setCurrentTab('home');
     props.getAllIssuesByProject(props.project);
     props.clickProjectHomeHandler();
   };
@@ -35,6 +36,7 @@ const ProjectListEntry = (props) => {
               isHovered
                 ? (
                   <ProjectListButtons
+                    setCurrentTab={props.setCurrentTab}
                     project={props.project}
                     getAllIssuesByProject={props.getAllIssuesByProject}
                     clickIssueViewHandler={props.clickIssueViewHandler}
