@@ -20,8 +20,11 @@ const App = (props) => {
   const [isNewIssueView, setIsNewIssueView] = useState(false);
   const [isIssueView, setIsIssueView] = useState(false);
   const [currentProject, setCurrentProject] = useState('');
+
   // const [issuesByProject, setIssuesByProject] = useState(null);
   const [issuesByProject, setIssuesByProject] = useState([]);
+  const [projectList, setProjectList] = useState([]);
+  const [issuesList, setIssuesList] = useState([]);
 
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
@@ -51,20 +54,90 @@ const App = (props) => {
     setIsIssueView(false);
   };
 
+  // PROJECT AXIOS FUNCTIONS
+  const getAllProjects = () => {
+    const url = '/projects/user/1';
+
+    axios.get(url)
+      .then(({ data }) => {
+        console.log(data);
+        setProjectList(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const addProject = (name) => {
+    const url = '/projects';
+    const params = {
+      userId: 1,
+      name,
+    };
+
+    axios.post(url, params)
+      .then(({ data }) => {
+        console.log(data);
+        setProjectList([...projectList, data]);
+      })
+      .catch((err) => {
+        console.log(error);
+      });
+  };
+
+  // ISSUES AXIOS FUNCTIONS
+  const getAllIssues = () => {
+    const url = '/issues/user/1';
+
+    axios.get(url)
+      .then(({ data }) => {
+        console.log(data);
+        setIssuesList(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getAllIssuesByProject = (proj) => {
     setCurrentProject(proj.name);
-    const id = proj.id;
-    const url = '/issues?project=:projectid';
-    // axios.get()
+    const userId = 1;
+    const url = `/issues/user/${userId}/project/${proj.name}`;
 
+    axios.get(url)
+      .then(({ data }) => {
+        console.log(data);
+        setIssuesByProject(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    // do an axios request for issues for that project
+  const addIssue = (data) => {
+    const url = '/issues';
 
-  }
+    axios.post(url, data)
+      .then(({ data }) => {
+        setIssuesList([...issuesList, data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // useEffect(() => {
-  //   axios.get
-  // })
+  const deleteIssue = (id) => {
+    const url = `/issues/${id}`;
+
+    axios.delete(url)
+      .then((res) => {
+        getAllIssues();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
 
   let content = (
     <div className="progress">
@@ -79,6 +152,7 @@ const App = (props) => {
         <div className="row">
           <ProjectList
             projects={allProjects}
+            // projects={projectList}
             getAllIssuesByProject={getAllIssuesByProject}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickIssueViewHandler={clickIssueViewHandler}
@@ -88,6 +162,7 @@ const App = (props) => {
         </div>
         <div className="row">
           <IssuesListContainer issues={allIssues} />
+          {/* <IssuesListContainer issues={issuesList} /> */}
         </div>
       </>
     );
@@ -98,6 +173,7 @@ const App = (props) => {
       <>
         <ProjectHome
           issuesByProject={allIssuesForProject}
+          // issuesByProject={issuesByProject}
           clickProjectHomeHandler={clickProjectHomeHandler}
           clickDashboardHandler={clickDashboardHandler}
           clickNewIssueViewHandler={clickNewIssueViewHandler}
@@ -147,6 +223,7 @@ const App = (props) => {
         </div>
         <div class="col s12 m8 l11" style={{ marginTop: '7%' }}>
           <ProjectIssuesListContainer issuesByProject={allIssuesForProject} />
+          {/* <ProjectIssuesListContainer issuesByProject={issuesByProject} /> */}
         </div>
       </div>
     );
