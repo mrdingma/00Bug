@@ -23,12 +23,10 @@ const SideBarBtnEntry = ({ currentTab, setCurrentTab, type, clickIssueViewHandle
     if (e.target.name === 'home' || e.target.innerText.toLowerCase().includes('home')) {
       setCurrentTab('home');
       clickProjectHomeHandler();
-    }
-    if (e.target.name === 'add' || e.target.innerText.toLowerCase().includes('add')) {
+    } else if (e.target.name === 'add' || e.target.innerText.toLowerCase().includes('add')) {
       setCurrentTab('new_issue');
       clickNewIssueViewHandler();
-    }
-    if (e.target.name === 'storage' || e.target.innerText.toLowerCase().includes('storage')) {
+    } else {
       setCurrentTab('issues');
       clickIssueViewHandler();
     }

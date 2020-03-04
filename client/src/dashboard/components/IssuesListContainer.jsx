@@ -8,6 +8,7 @@ const IssuesListContainer = (props) => {
     setIsClicked(!isClicked);
   };
 
+
   let content = (
     <div className="col s5 offset-s1">
       <ul>
@@ -17,6 +18,7 @@ const IssuesListContainer = (props) => {
             My Issues
           </div>
           <IssuesList issues={props.issues} />
+
         </li>
       </ul>
     </div>
