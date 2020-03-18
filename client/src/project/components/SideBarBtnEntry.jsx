@@ -1,51 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-const SideBarBtnEntry = ({ currentTab, setCurrentTab, type, clickIssueViewHandler, clickProjectHomeHandler, clickNewIssueViewHandler }) => {
+const SideBarBtnEntry = ({
+  currentTab,
+  setCurrentTab,
+  type,
+  clickIssueViewHandler,
+  clickProjectHomeHandler,
+  clickNewIssueViewHandler
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const hoverHandler = (value) => {
+  const hoverHandler = value => {
     setIsHovered(value);
   };
 
   const typeToText = {
-    home: 'Home',
-    add: 'Add Issue',
-    storage: 'Issues',
+    home: "Home",
+    add: "Add Issue",
+    storage: "Issues"
   };
 
   const typeToTab = {
-    home: 'home',
-    add: 'new_issue',
-    storage: 'issue_list',
+    home: "home",
+    add: "new_issue",
+    storage: "issue_list"
   };
 
-  const onClickHandler = (e) => {
-    if (e.target.name === 'home' || e.target.innerText.toLowerCase().includes('home')) {
-      setCurrentTab('home');
+  const onClickHandler = e => {
+    if (
+      e.target.name === "home" ||
+      e.target.innerText.toLowerCase().includes("home")
+    ) {
+      setCurrentTab("home");
       clickProjectHomeHandler();
-    } else if (e.target.name === 'add' || e.target.innerText.toLowerCase().includes('add')) {
-      setCurrentTab('new_issue');
+    } else if (
+      e.target.name === "add" ||
+      e.target.innerText.toLowerCase().includes("add")
+    ) {
+      setCurrentTab("new_issue");
       clickNewIssueViewHandler();
     } else {
-      setCurrentTab('issues');
+      setCurrentTab("issues");
       clickIssueViewHandler();
     }
   };
 
-  const colorSelector = (t) => {
+  const colorSelector = t => {
     if (isHovered || currentTab === typeToTab[t]) {
-      return '#4CAF93';
+      return "#4CAF93";
     }
-    return 'white';
+    return "white";
   };
 
-  const bgColorSelector = (t) => {
+  const bgColorSelector = t => {
     if (isHovered || currentTab === typeToTab[t]) {
-      return 'white';
+      return "white";
     }
-    return '#4CAF93';
+    return "#4CAF93";
   };
-
 
   let content = (
     <li
@@ -53,23 +65,20 @@ const SideBarBtnEntry = ({ currentTab, setCurrentTab, type, clickIssueViewHandle
       onMouseEnter={() => hoverHandler(true)}
       onMouseLeave={() => hoverHandler(false)}
       name={type}
-      style={{ color: colorSelector(type), backgroundColor: bgColorSelector(type) }}
-      onClick={(e) => onClickHandler(e)}
+      style={{
+        color: colorSelector(type),
+        backgroundColor: bgColorSelector(type)
+      }}
+      onClick={e => onClickHandler(e)}
     >
-      <i
-        name={type}
-        className="sideIcon material-icons"
-      >
+      <i name={type} className="sideIcon material-icons">
         {type}
       </i>
-      <div className="sidebtnTxt">
-        {typeToText[type]}
-      </div>
+      <div className="sidebtnTxt">{typeToText[type]}</div>
     </li>
   );
 
   return content;
-
 };
 
 export default SideBarBtnEntry;
