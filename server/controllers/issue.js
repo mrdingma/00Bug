@@ -1,4 +1,4 @@
-const IssueModel = require('../models/Issue');
+const IssueModel = require("../models/Issue");
 
 async function addNew(data) {
   const issue = new IssueModel(data);
@@ -15,20 +15,25 @@ async function deleteOne(issueId) {
 }
 
 async function getAllByUser(userId) {
-  return IssueModel.find({ userId });
+  return IssueModel.find({ $or: [{ userId }, { assignee: userId }] });
 }
 
 async function getAllByUserAndProject(userId, project) {
-  return IssueModel.find({ userId, project });
+  return IssueModel.find({
+    $or: [
+      { userId, project },
+      { assignee: userId, project }
+    ]
+  });
 }
 
 async function update(issueId, data) {
   const item = await getOne(issueId);
 
   // if can't find item, throw error
-  if (!item) throw new Error('Could not find the requested item');
+  if (!item) throw new Error("Could not find the requested item");
 
-  Object.keys(data).forEach((key) => {
+  Object.keys(data).forEach(key => {
     item[key] = data[key];
   });
 
@@ -41,5 +46,5 @@ module.exports = {
   update,
   deleteOne,
   getAllByUser,
-  getAllByUserAndProject,
+  getAllByUserAndProject
 };
