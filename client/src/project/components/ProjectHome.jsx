@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import SideBarContainer from './SideBarContainer.jsx';
+import SideBarContainer from "./SideBarContainer.jsx";
 
-const Home = (props) => {
-
+const ProjectHome = props => {
   let content = (
     <>
       <SideBarContainer
@@ -20,4 +19,4 @@ const Home = (props) => {
   return content;
 };
 
-export default Home;
+export default ProjectHome;
