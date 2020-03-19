@@ -1,11 +1,11 @@
-td, th {
-  padding: 5px !important
+td,
+th {
+  padding: 5px !important;
 }
-
 
 .sidenav {
   width: 40px !important;
-  background-color: #4CAF93;
+  background-color: #4caf93;
 }
 
 .sidenav:hover {
@@ -35,10 +35,26 @@ td, th {
 }
 
 .menu {
-  color: #4CAF93;
+  color: #4caf93;
 }
 
 .sidenav-trigger {
   position: absolute;
   z-index: 3 !important;
+}
+
+.progress-bar-open {
+  background-color: #ed8077;
+}
+
+.progress-bar-in-progress {
+  background-color: #4488c5;
+}
+
+.progress-bar-resolved {
+  background-color: #5eb5a6;
+}
+
+.progress-bar-closed {
+  background-color: #d0d88a;
 }
