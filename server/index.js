@@ -15,6 +15,9 @@ mongoose.connect(config.mongodb.dsn, {
   useUnifiedTopology: true
 });
 
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
+
 // middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
