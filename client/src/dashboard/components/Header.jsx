@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { Modal, TextInput, Button } from "react-materialize";
 
-const Header = ({ addProject, addUser }) => {
+const Header = ({ addProject, addFriend }) => {
   const [projectName, setProjectName] = useState("");
-  const [newUser, setNewUser] = useState("");
+  const [newFriend, setNewFriend] = useState("");
 
   const handleAddNewProject = () => {
     if (projectName !== "") {
@@ -13,13 +13,13 @@ const Header = ({ addProject, addUser }) => {
     }
   };
 
-  const handleAddNewUser = () => {
-    if (/(.)+@(.)+.(.)+/gi.test(newUser)) {
-      // addProject(projectName);
-      setNewUser("");
+  const handleAddNewFriend = () => {
+    if (/(.)+@(.)+.(.)+/gi.test(newFriend)) {
+      addFriend(newFriend);
+      setNewFriend("");
     } else {
       alert("Enter a valid email address");
-      setNewUser("");
+      setNewFriend("");
     }
   };
 
@@ -96,7 +96,7 @@ const Header = ({ addProject, addUser }) => {
                       modal="close"
                       node="button"
                       waves="green"
-                      onClick={handleAddNewUser}
+                      onClick={handleAddNewFriend}
                     >
                       Submit
                     </Button>
@@ -105,15 +105,12 @@ const Header = ({ addProject, addUser }) => {
                 >
                   <TextInput
                     type="email"
-                    value={newUser}
+                    value={newFriend}
                     required
                     placeholder="email"
-                    onChange={e => setNewUser(e.target.value)}
+                    onChange={e => setNewFriend(e.target.value)}
                   />
                 </Modal>
-                {/* <li>
-                  <a>Add User</a>
-                </li> */}
               </ul>
             </li>
           </ul>

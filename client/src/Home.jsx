@@ -4,13 +4,15 @@ import Header from "./dashboard/components/Header.jsx";
 import ProjectList from "./dashboard/components/ProjectList.jsx";
 import RecentUpdatesContainer from "./dashboard/components/RecentUpdatesContainer.jsx";
 import IssuesListContainer from "./dashboard/components/IssuesListContainer.jsx";
-import ProjectHome from "./project/components/Home.jsx";
+import ProjectHome from "./project/components/ProjectHome.jsx";
 import NewIssueForm from "./project/components/NewIssueForm.jsx";
 import ProjectHeader from "./project/elements/projectHeader";
 import ProjectIssuesListContainer from "./project/components/ProjectIssuesListContainer.jsx";
+import StatusBar from "./project/components/StatusBar.jsx";
+
 import { useAuth0 } from "./auth0.jsx";
 
-const App = props => {
+const Home = props => {
   const [isDashboardView, setIsDashboardView] = useState(true);
   const [isProjectHomeView, setIsProjectHomeView] = useState(false);
   const [isNewIssueView, setIsNewIssueView] = useState(false);
@@ -20,7 +22,7 @@ const App = props => {
   const [projectList, setProjectList] = useState(null);
   const [issuesList, setIssuesList] = useState(null);
   const [currentTab, setCurrentTab] = useState("dashboard");
-
+  const [friends, setFriends] = useState([]);
   const { user } = useAuth0();
 
   const switchTabHandler = page => {
@@ -55,9 +57,40 @@ const App = props => {
     setIsIssueView(false);
   };
 
-  // PROJECT AXIOS FUNCTIONS
+  // USER FRIENDS AXIOS
+  const getAllFriends = () => {
+    const url = `/friends/user/${user.name}`;
+
+    axios
+      .get(url)
+      .then(({ data }) => {
+        setFriends(data.friends);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const addFriend = email => {
+    const url = "/friends";
+    const params = {
+      userId: user.name,
+      email
+    };
+
+    axios
+      .post(url, params)
+      .then(({ data }) => {
+        setFriends(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  // PROJECT AXIOS
   const getAllProjects = () => {
-    const url = "/projects/user/1";
+    const url = `/projects/user/${user.name}`;
 
     axios
       .get(url)
@@ -72,7 +105,7 @@ const App = props => {
   const addProject = name => {
     const url = "/projects";
     const params = {
-      userId: 1,
+      userId: user.name,
       name
     };
 
@@ -88,7 +121,7 @@ const App = props => {
 
   // ISSUES AXIOS FUNCTIONS
   const getAllIssues = () => {
-    const url = "/issues/user/1";
+    const url = `/issues/user/${user.name}`;
 
     axios
       .get(url)
@@ -102,8 +135,7 @@ const App = props => {
 
   const getAllIssuesByProject = proj => {
     setCurrentProject(proj.name);
-    const userId = 1;
-    const url = `/issues/user/${userId}/project/${proj.name}`;
+    const url = `/issues/user/${user.name}/project/${proj.name}`;
 
     axios
       .get(url)
@@ -115,11 +147,11 @@ const App = props => {
       });
   };
 
-  const addIssue = data => {
+  const addIssue = d => {
     const url = "/issues";
 
     axios
-      .post(url, data)
+      .post(url, d)
       .then(({ data }) => {
         setIssuesList([...issuesList, data]);
       })
@@ -144,6 +176,7 @@ const App = props => {
   useEffect(() => {
     getAllProjects();
     getAllIssues();
+    getAllFriends();
   }, []);
 
   let content = (
@@ -164,10 +197,11 @@ const App = props => {
     </div>
   );
 
+  // Dashboard Main Page
   if (isDashboardView && projectList !== null && issuesList !== null) {
     content = (
       <>
-        <Header addProject={addProject} />
+        <Header addFriend={addFriend} addProject={addProject} />
         <div className="row">
           <ProjectList
             setCurrentTab={setCurrentTab}
@@ -186,14 +220,15 @@ const App = props => {
     );
   }
 
-  if (isProjectHomeView) {
+  // Project home
+  if (isProjectHomeView && issuesByProject !== null) {
     content = (
       <>
         <div class="row">
           <ProjectHeader class="col s12 m4 l1">
             <div>{currentProject}</div>
           </ProjectHeader>
-          <div class="col s12 m4 l1">
+          <div className="col s12 m4 l1">
             <ProjectHome
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
@@ -203,14 +238,16 @@ const App = props => {
               clickIssueViewHandler={clickIssueViewHandler}
             />
           </div>
-          <div class="col s12 m8 l10" style={{ marginTop: "7%" }}>
+          <div className="col s12 m8 l10" style={{ marginTop: "7%" }}>
             <RecentUpdatesContainer />
+            <StatusBar issuesByProject={issuesByProject} />
           </div>
         </div>
       </>
     );
   }
 
+  // New issue form
   if (isNewIssueView && issuesByProject !== null) {
     content = (
       <>
@@ -229,13 +266,18 @@ const App = props => {
             />
           </div>
           <div class="col s12 m8 l10" style={{ marginTop: "7%" }}>
-            <NewIssueForm currentProject={currentProject} addIssue={addIssue} />
+            <NewIssueForm
+              friends={friends}
+              currentProject={currentProject}
+              addIssue={addIssue}
+            />
           </div>
         </div>
       </>
     );
   }
 
+  // Issues listing view
   if (isIssueView && issuesByProject !== null) {
     content = (
       <div class="row">
@@ -252,7 +294,7 @@ const App = props => {
             clickIssueViewHandler={clickIssueViewHandler}
           />
         </div>
-        <div class="col s12 m8 l11" style={{ marginTop: "7%" }}>
+        <div className="col s6 m8 l10" style={{ marginTop: "7%" }}>
           <ProjectIssuesListContainer issuesByProject={issuesByProject} />
         </div>
       </div>
@@ -262,4 +304,4 @@ const App = props => {
   return content;
 };
 
-export default App;
+export default Home;
