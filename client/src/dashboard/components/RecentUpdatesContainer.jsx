@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import RecentUpdatesList from './RecentUpdatesList.jsx';
+import React, { useEffect, useState } from "react";
+import RecentUpdatesList from "./RecentUpdatesList.jsx";
 
-const RecentUpdatesContainer = (props) => {
+const RecentUpdatesContainer = props => {
   const [isClicked, setIsClicked] = useState(false);
 
   const onClickHandler = () => {
     setIsClicked(!isClicked);
   };
 
-
   let content = (
-    <div className="col s5 offset-s1">
+    <div className="col s5">
       <ul>
         <li>
           <div onClick={onClickHandler}>
-            {
-              isClicked
-                ? <i className="material-icons">keyboard_arrow_down</i>
-                : <i className="material-icons">keyboard_arrow_up</i>
-            }
+            {isClicked ? (
+              <i className="material-icons">keyboard_arrow_down</i>
+            ) : (
+              <i className="material-icons">keyboard_arrow_up</i>
+            )}
             Recent Updates
           </div>
-          {
-            isClicked
-              ? null
-              : <RecentUpdatesList />
-          }
+          {isClicked ? null : <RecentUpdatesList />}
         </li>
       </ul>
     </div>
