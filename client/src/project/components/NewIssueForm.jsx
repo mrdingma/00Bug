@@ -1,41 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { DatePicker } from 'react-materialize';
-import FormBody from '../elements/formBody';
-import date from 'date-and-time';
+import React, { useEffect, useState } from "react";
+import { DatePicker } from "react-materialize";
+import FormBody from "../elements/formBody";
+import date from "date-and-time";
+import { useAuth0 } from "../../auth0.jsx";
 
 const NewIssueForm = ({ currentProject, addIssue }) => {
-  const [subject, setSubject] = useState('');
-  const [type, setType] = useState('task');
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [assignee, setAssignee] = useState('');
-  const [attachment, setAttachment] = useState('');
+  const [subject, setSubject] = useState("");
+  const [type, setType] = useState("task");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [assignee, setAssignee] = useState("");
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
-    const elems = document.querySelectorAll('select');
+    const elems = document.querySelectorAll("select");
     M.FormSelect.init(elems, {});
-    M.textareaAutoResize($('#textarea1'));
+    M.textareaAutoResize($("#textarea1"));
   });
 
-  const dueDateHandler = (d) => {
-    setDueDate(date.format(d, 'YYYY-MM-DD'));
+  const dueDateHandler = d => {
+    setDueDate(date.format(d, "YYYY-MM-DD"));
   };
 
+  const { user } = useAuth0();
 
   const clickHandler = () => {
     const data = {
-      userId: 1,
+      userId: user.name,
       project: currentProject,
-      status: 'open',
+      status: "open",
       due_date: dueDate,
       summary: subject,
       priority,
       type,
       description,
       assignee: { name: assignee },
-      assigner: { name: 'Dean Ma' },
-      attachments: [attachment],
+      assigner: { name: user.name },
+      attachments: [attachment]
     };
     addIssue(data);
   };
@@ -50,7 +52,10 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
         <form className="col s12">
           <div name="type" className="row">
             <div className="input-field col s2">
-              <select className="selectTask" onChange={(e) => setType(e.target.value)}>
+              <select
+                className="selectTask"
+                onChange={e => setType(e.target.value)}
+              >
                 <option value="task">Task</option>
                 <option value="bug">Bug</option>
                 <option value="request">Request</option>
@@ -58,9 +63,14 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
               </select>
             </div>
           </div>
-          <div name="subject" className="row" >
+          <div name="subject" className="row">
             <div className="input-field col s12">
-              <input id="subject" type="text" className="validate" onChange={(e) => setSubject(e.target.value)} />
+              <input
+                id="subject"
+                type="text"
+                className="validate"
+                onChange={e => setSubject(e.target.value)}
+              />
               <label for="subject">Subject</label>
             </div>
           </div>
@@ -71,26 +81,53 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
                 <textarea
                   id="textarea1"
                   class="materialize-textarea"
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={e => setDescription(e.target.value)}
                 />
               </div>
-              <div className="col s5" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
+              <div
+                className="col s5"
+                style={{
+                  display: "flex",
+                  paddingLeft: "24px",
+                  marginTop: "10px"
+                }}
+              >
                 <div>Status</div>
-                <div style={{ paddingLeft: '24px' }}>Open</div>
+                <div style={{ paddingLeft: "24px" }}>Open</div>
               </div>
-              <div className="col s5 offset-s2" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
+              <div
+                className="col s5 offset-s2"
+                style={{
+                  display: "flex",
+                  paddingLeft: "24px",
+                  marginTop: "10px"
+                }}
+              >
                 <div>Assignee</div>
-                <div style={{ paddingLeft: '24px' }}>
-                  <select className="selectTask" onChange={(e) => setAssignee(e.target.value)}>
+                <div style={{ paddingLeft: "24px" }}>
+                  <select
+                    className="selectTask"
+                    onChange={e => setAssignee(e.target.value)}
+                  >
                     <option value=" " />
                     <option value="Dean Ma">Dean Ma</option>
                   </select>
                 </div>
               </div>
-              <div className="col s5" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
+              <div
+                className="col s5"
+                style={{
+                  display: "flex",
+                  paddingLeft: "24px",
+                  marginTop: "10px"
+                }}
+              >
                 <div>Priority</div>
-                <div style={{ paddingLeft: '24px' }}>
-                  <select className="selectTask" onChange={(e) => setPriority(e.target.value)}>
+                <div style={{ paddingLeft: "24px" }}>
+                  <select
+                    className="selectTask"
+                    onChange={e => setPriority(e.target.value)}
+                  >
                     <option value=" " />
                     <option value={1}>Low</option>
                     <option value={2}>Normal</option>
@@ -98,23 +135,41 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
                   </select>
                 </div>
               </div>
-              <div name="duedate" className="col s5 offset-s2" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
+              <div
+                name="duedate"
+                className="col s5 offset-s2"
+                style={{
+                  display: "flex",
+                  paddingLeft: "24px",
+                  marginTop: "10px"
+                }}
+              >
                 <div>Due date</div>
-                <div style={{ paddingLeft: '24px' }}>
+                <div style={{ paddingLeft: "24px" }}>
                   <DatePicker
                     value={dueDate}
                     id="myDate"
-                    onChange={(d) => dueDateHandler(d)}
+                    onChange={d => dueDateHandler(d)}
                   />
                 </div>
               </div>
-              <div className="col s5" style={{ display: 'flex', paddingLeft: '24px', marginTop: '10px' }}>
+              <div
+                className="col s5"
+                style={{
+                  display: "flex",
+                  paddingLeft: "24px",
+                  marginTop: "10px"
+                }}
+              >
                 <div>
                   <form action="#">
                     <div className="file-field input-field">
                       <div className="waves-effect btn-small">
                         <span>Attach</span>
-                        <input type="file" onChange={(e) => setAttachment(e.target.files[0])} />
+                        <input
+                          type="file"
+                          onChange={e => setAttachment(e.target.files[0])}
+                        />
                       </div>
                       <div className="file-path-wrapper">
                         <input className="file-path validate" type="text" />
@@ -123,14 +178,18 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
                   </form>
                 </div>
               </div>
-              <div className="col s5 offset-s2" style={{ paddingLeft: '17%', paddingTop: '3%' }}>
-                <a class="waves-effect btn" onClick={clickHandler}>Add</a>
+              <div
+                className="col s5 offset-s2"
+                style={{ paddingLeft: "17%", paddingTop: "3%" }}
+              >
+                <a class="waves-effect btn" onClick={clickHandler}>
+                  Add
+                </a>
               </div>
             </FormBody>
           </div>
         </form>
       </div>
-
     </>
   );
   return content;
