@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const IssueSchema = new Schema({
-  userId: Number,
+  userId: String,
   project: String,
   status: String,
   due_date: Date,
@@ -12,19 +12,19 @@ const IssueSchema = new Schema({
   type: String,
   created_date: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   description: String,
   assignee: {
     name: String,
-    default: '',
+    default: ""
   },
   assigner: {
-    name: String,
+    name: String
   },
   attachments: {
-    type: Array,
-  },
+    type: Array
+  }
 });
 
-module.exports = mongoose.model('Issue', IssueSchema);
+module.exports = mongoose.model("Issue", IssueSchema);
