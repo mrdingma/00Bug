@@ -1,5 +1,26 @@
 const express = require("express");
 const issue_controller = require("../../controllers/issue");
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+const multer = require("multer");
+const cloudinary_config = require("../../config/cloudinary");
+const _ = require("lodash");
+
+// cloudinary setup
+cloudinary.config({
+  cloud_name: cloudinary_config.CLOUD_NAME,
+  api_key: cloudinary_config.API_KEY,
+  api_secret: cloudinary_config.API_SECRET
+});
+
+const storage = cloudinaryStorage({
+  cloudinary,
+  folder: "demo",
+  allowedFormats: ["jpg", "png"],
+  transformation: [{ width: 500, height: 500, crop: "limit" }]
+});
+
+const parser = multer({ storage });
 
 module.exports = () => {
   const router = express.Router();
@@ -27,9 +48,11 @@ module.exports = () => {
     }
   });
 
-  router.post("/", async (req, res, next) => {
+  router.post("/", parser.single("image"), async (req, res, next) => {
     try {
-      const issue = await issue_controller.addNew(req.body);
+      const issue = await issue_controller.addNew(
+        _.assignIn(req.body, { attachment: req.file ? req.file.url : "" })
+      );
       return res.send(issue);
     } catch (err) {
       return next(err);
