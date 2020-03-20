@@ -27,20 +27,21 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
   const { user } = useAuth0();
 
   const clickHandler = () => {
-    const data = {
-      userId: user.name,
-      project: currentProject,
-      status: "open",
-      due_date: dueDate,
-      summary: subject,
-      priority,
-      type,
-      description,
-      assignee: { name: assignee },
-      assigner: { name: user.name },
-      attachments: [attachment]
-    };
-    addIssue(data);
+    const payload = new FormData();
+    payload.append("image", attachment);
+    payload.set("userId", user.name);
+    payload.set("project", currentProject);
+    payload.set("status", "open");
+    payload.set("due_date", dueDate);
+    payload.set("summary", subject);
+    payload.set("priority", priority);
+    payload.set("type", type);
+    payload.set("description", description);
+    payload.set("assignee", assignee);
+    payload.set("assigner", user.name);
+
+    addIssue(payload);
+    setAttachment("");
     setConfirmScreen(true);
   };
 
