@@ -16,15 +16,11 @@ const IssueSchema = new Schema({
   },
   description: String,
   assignee: {
-    name: String,
+    type: String,
     default: ""
   },
-  assigner: {
-    name: String
-  },
-  attachments: {
-    type: Array
-  }
+  assigner: String,
+  attachment: String
 });
 
 module.exports = mongoose.model("Issue", IssueSchema);
