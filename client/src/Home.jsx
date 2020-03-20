@@ -64,7 +64,7 @@ const Home = props => {
     axios
       .get(url)
       .then(({ data }) => {
-        setFriends(data.friends);
+        setFriends(data[0].friends);
       })
       .catch(err => {
         console.log(err);
