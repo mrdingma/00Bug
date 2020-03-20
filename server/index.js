@@ -4,8 +4,9 @@ const path = require("path");
 const routeHandler = require("./routes");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const config = require("./config");
+const config = require("./config/mongo");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const PORT = process.env.PORT || 3001;
 
@@ -14,13 +15,13 @@ mongoose.connect(config.mongodb.dsn, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 
 // middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
