@@ -154,7 +154,7 @@ const Home = props => {
       .post(url, d)
       .then(({ data }) => {
         setIssuesList([...issuesList, data]);
-        getAllIssuesByProject(currentProject);
+        getAllIssuesByProject({ name: currentProject });
       })
       .catch(err => {
         console.log(err);
