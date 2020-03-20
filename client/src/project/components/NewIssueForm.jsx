@@ -12,6 +12,7 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
   const [dueDate, setDueDate] = useState("");
   const [assignee, setAssignee] = useState("");
   const [attachment, setAttachment] = useState("");
+  const [confirmScreen, setConfirmScreen] = useState(false);
 
   useEffect(() => {
     const elems = document.querySelectorAll("select");
@@ -40,6 +41,7 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
       attachments: [attachment]
     };
     addIssue(data);
+    setConfirmScreen(true);
   };
 
   let content = (
@@ -190,6 +192,24 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
       </div>
     </>
   );
+
+  if (confirmScreen) {
+    content = (
+      <>
+        <div className="row issue-confirm">
+          <div style={{ marginBottom: "0.5em", fontWeight: "100" }}>
+            Issue has been added
+          </div>
+          <div>
+            <a class="waves-effect btn" onClick={() => setConfirmScreen(false)}>
+              Add another Issue
+            </a>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return content;
 };
 
