@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Status from "../../dashboard/elements/status";
 import date from "date-and-time";
+import { useAuth0 } from "../../auth0.jsx";
 
 const IssuesListEntry = ({ issue }) => {
   const statusColorMapper = {
@@ -26,6 +27,8 @@ const IssuesListEntry = ({ issue }) => {
     return date.format(new Date(d), "MMM. D, YYYY");
   };
 
+  const { user } = useAuth0();
+
   const content = (
     <>
       <tr>
@@ -35,7 +38,13 @@ const IssuesListEntry = ({ issue }) => {
           </Status>
         </td>
         <td>{issue.summary}</td>
-        <td>{issue.assignee.name ? issue.assignee.name : ""}</td>
+        <td>
+          {issue.assignee.name
+            ? issue.assignee.name === user.name
+              ? "me"
+              : issue.assignee.name
+            : ""}
+        </td>
         <td>
           <Status
             className="white-text"
@@ -50,7 +59,9 @@ const IssuesListEntry = ({ issue }) => {
         <td>{dateConverter(issue.created_date)}</td>
         <td>{issue.due_date === null ? "" : dateConverter(issue.due_date)}</td>
         <td></td>
-        <td>{issue.assigner.name}</td>
+        <td>
+          {issue.assigner.name === user.name ? "myself" : issue.assigner.name}
+        </td>
         <td>
           {issue.attachments[0] === "" ? (
             ""
