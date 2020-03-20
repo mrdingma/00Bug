@@ -58,3 +58,11 @@ th {
 .progress-bar-closed {
   background-color: #d0d88a;
 }
+
+.issue-confirm {
+  padding: 1em;
+  border: 1px solid grey;
+  border-radius: 4px;
+  display: block;
+  text-align: center;
+}
