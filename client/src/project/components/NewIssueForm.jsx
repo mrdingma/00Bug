@@ -4,7 +4,7 @@ import FormBody from "../elements/formBody";
 import date from "date-and-time";
 import { useAuth0 } from "../../auth0.jsx";
 
-const NewIssueForm = ({ currentProject, addIssue }) => {
+const NewIssueForm = ({ currentProject, addIssue, friends }) => {
   const [subject, setSubject] = useState("");
   const [type, setType] = useState("task");
   const [description, setDescription] = useState("");
@@ -41,10 +41,6 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
     };
     addIssue(data);
   };
-
-  // const dueDateHandler = (e) => {
-  //   setDueDate(date.format(e, 'YYYY-MM-DD'));
-  // };
 
   let content = (
     <>
@@ -104,13 +100,15 @@ const NewIssueForm = ({ currentProject, addIssue }) => {
                 }}
               >
                 <div>Assignee</div>
-                <div style={{ paddingLeft: "24px" }}>
+                <div style={{ paddingLeft: "24px", width: "100%" }}>
                   <select
                     className="selectTask"
                     onChange={e => setAssignee(e.target.value)}
                   >
-                    <option value=" " />
-                    <option value="Dean Ma">Dean Ma</option>
+                    <option value={user.name}>Myself</option>
+                    {friends.map(friend => (
+                      <option value={friend}>{friend}</option>
+                    ))}
                   </select>
                 </div>
               </div>
