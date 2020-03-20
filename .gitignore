@@ -2,4 +2,6 @@ package-lock.json
 node_modules
 bundle.js
 auth_config.js
-/Users/deanma/00Bug/server/config/index.js
+cloudinary.js
+mongo.js
+config.env
