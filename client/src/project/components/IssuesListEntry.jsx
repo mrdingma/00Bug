@@ -39,10 +39,10 @@ const IssuesListEntry = ({ issue }) => {
         </td>
         <td>{issue.summary}</td>
         <td>
-          {issue.assignee.name
-            ? issue.assignee.name === user.name
+          {issue.assignee
+            ? issue.assignee === user.name
               ? "me"
-              : issue.assignee.name
+              : issue.assignee
             : ""}
         </td>
         <td>
@@ -59,14 +59,14 @@ const IssuesListEntry = ({ issue }) => {
         <td>{dateConverter(issue.created_date)}</td>
         <td>{issue.due_date === null ? "" : dateConverter(issue.due_date)}</td>
         <td></td>
+        <td>{issue.assigner === user.name ? "myself" : issue.assigner}</td>
         <td>
-          {issue.assigner.name === user.name ? "myself" : issue.assigner.name}
-        </td>
-        <td>
-          {issue.attachments[0] === "" ? (
+          {issue.attachment === "" ? (
             ""
           ) : (
-            <i className="material-icons">attach_file</i>
+            <a href={issue.attachment} target="_blank">
+              <i className="material-icons">attach_file</i>
+            </a>
           )}
         </td>
       </tr>
