@@ -206,6 +206,7 @@ const Home = props => {
         <Header addFriend={addFriend} addProject={addProject} />
         <div className="row">
           <ProjectList
+            setSelectedIssue={setSelectedIssue}
             setCurrentTab={setCurrentTab}
             projects={projectList}
             getAllIssuesByProject={getAllIssuesByProject}
@@ -301,6 +302,7 @@ const Home = props => {
         </div>
         <div className="col s6 m8 l10" style={{ marginTop: "7%" }}>
           <ProjectIssuesListContainer
+            selectedIssue={selectedIssue}
             setSelectedIssue={setSelectedIssue}
             issuesByProject={issuesByProject}
           />
