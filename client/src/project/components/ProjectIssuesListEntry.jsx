@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Status from "../../dashboard/elements/status";
 import date from "date-and-time";
 import { useAuth0 } from "../../auth0.jsx";
+import IssueTypeTag from "./IssueTypeTag.jsx";
+import IssueStatusTag from "./IssueStatusTag.jsx";
 
 const IssuesListEntry = ({ issue, setSelectedIssue }) => {
-  const statusColorMapper = {
-    open: "#ED8077",
-    in_progress: "#4488C5",
-    resolved: "#5EB5A6"
-  };
-
-  const typeColorMapper = {
-    request: "#EDA62A",
-    task: "#B0BE3C",
-    bug: "#E87758",
-    other: "#3B9DBD"
-  };
-
   const priorityIconMapper = {
     1: "arrow_downward",
     2: "arrow_forward",
@@ -33,9 +21,7 @@ const IssuesListEntry = ({ issue, setSelectedIssue }) => {
     <>
       <tr style={{ cursor: "pointer" }} onClick={() => setSelectedIssue(issue)}>
         <td>
-          <Status className="white-text" color={typeColorMapper[issue.type]}>
-            {issue.type}
-          </Status>
+          <IssueTypeTag issue={issue} />
         </td>
         <td>{issue.summary}</td>
         <td>
@@ -46,12 +32,7 @@ const IssuesListEntry = ({ issue, setSelectedIssue }) => {
             : ""}
         </td>
         <td>
-          <Status
-            className="white-text"
-            color={statusColorMapper[issue.status]}
-          >
-            {issue.status}
-          </Status>
+          <IssueStatusTag issue={issue} />
         </td>
         <td>
           <i className="material-icons">{priorityIconMapper[issue.priority]}</i>
