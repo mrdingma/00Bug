@@ -66,3 +66,7 @@ th {
   display: block;
   text-align: center;
 }
+
+.dropdown-content {
+  top: 100% !important;
+}
