@@ -8,7 +8,7 @@ const IssueSchema = new Schema({
   status: String,
   due_date: Date,
   summary: String,
-  priority: Number,
+  priority: String,
   type: String,
   created_date: {
     type: Date,

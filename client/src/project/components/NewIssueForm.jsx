@@ -129,10 +129,10 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
                     className="selectTask"
                     onChange={e => setPriority(e.target.value)}
                   >
-                    <option value=" " />
-                    <option value={1}>Low</option>
-                    <option value={2}>Normal</option>
-                    <option value={3}>High</option>
+                    <option value="" />
+                    <option value={"Low"}>Low</option>
+                    <option value={"Normal"}>Normal</option>
+                    <option value={"High"}>High</option>
                   </select>
                 </div>
               </div>
