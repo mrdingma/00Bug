@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import M from 'materialize-css/dist/js/materialize.min.js';
-import SideBarBtnList from './SideBarBtnList.jsx';
+import React, { useState, useEffect } from "react";
+import M from "materialize-css/dist/js/materialize.min.js";
+import SideBarBtnList from "./SideBarBtnList.jsx";
 
 // TODO: highlight current button
 
-const SideBarContainer = (props) => {
+const SideBarContainer = props => {
   useEffect(() => {
-    const sidenav = document.querySelectorAll('.sidenav');
+    const sidenav = document.querySelectorAll(".sidenav");
     M.Sidenav.init(sidenav, {});
   });
 
   return (
     <>
-      <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="menu material-icons">menu</i></a>
+      <a href="#" data-target="slide-out" className="sidenav-trigger">
+        <i className="menu material-icons">menu</i>
+      </a>
       <ul id="slide-out" className="sidenav sidenav-fixed">
         <SideBarBtnList
+          setSelectedIssue={props.setSelectedIssue}
           currentTab={props.currentTab}
           setCurrentTab={props.setCurrentTab}
           clickProjectHomeHandler={props.clickProjectHomeHandler}

@@ -4,6 +4,7 @@ const SideBarBtnEntry = ({
   currentTab,
   setCurrentTab,
   type,
+  setSelectedIssue,
   clickIssueViewHandler,
   clickProjectHomeHandler,
   clickNewIssueViewHandler
@@ -40,6 +41,7 @@ const SideBarBtnEntry = ({
       setCurrentTab("new_issue");
       clickNewIssueViewHandler();
     } else {
+      setSelectedIssue(null);
       setCurrentTab("issues");
       clickIssueViewHandler();
     }

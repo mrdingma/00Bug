@@ -20,7 +20,15 @@ const IssueSchema = new Schema({
     default: ""
   },
   assigner: String,
-  attachment: String
+  attachment: String,
+  comments: [
+    {
+      userId: String,
+      text: String,
+      date: { type: Date, default: Date.now },
+      attachment: String
+    }
+  ]
 });
 
 module.exports = mongoose.model("Issue", IssueSchema);

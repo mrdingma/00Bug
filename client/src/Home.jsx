@@ -21,6 +21,7 @@ const Home = props => {
   const [issuesByProject, setIssuesByProject] = useState(null);
   const [projectList, setProjectList] = useState(null);
   const [issuesList, setIssuesList] = useState(null);
+  const [selectedIssue, setSelectedIssue] = useState(null);
   const [currentTab, setCurrentTab] = useState("dashboard");
   const [friends, setFriends] = useState([]);
   const { user } = useAuth0();
@@ -233,6 +234,7 @@ const Home = props => {
             <ProjectHome
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              setSelectedIssue={setSelectedIssue}
               clickProjectHomeHandler={clickProjectHomeHandler}
               clickDashboardHandler={clickDashboardHandler}
               clickNewIssueViewHandler={clickNewIssueViewHandler}
@@ -259,6 +261,7 @@ const Home = props => {
           <div class="col s12 m4 l1">
             <ProjectHome
               currentTab={currentTab}
+              setSelectedIssue={setSelectedIssue}
               setCurrentTab={setCurrentTab}
               clickProjectHomeHandler={clickProjectHomeHandler}
               clickDashboardHandler={clickDashboardHandler}
@@ -288,6 +291,7 @@ const Home = props => {
         <div class="col s12 m4 l1">
           <ProjectHome
             currentTab={currentTab}
+            setSelectedIssue={setSelectedIssue}
             setCurrentTab={setCurrentTab}
             clickProjectHomeHandler={clickProjectHomeHandler}
             clickDashboardHandler={clickDashboardHandler}
@@ -296,7 +300,10 @@ const Home = props => {
           />
         </div>
         <div className="col s6 m8 l10" style={{ marginTop: "7%" }}>
-          <ProjectIssuesListContainer issuesByProject={issuesByProject} />
+          <ProjectIssuesListContainer
+            setSelectedIssue={setSelectedIssue}
+            issuesByProject={issuesByProject}
+          />
         </div>
       </div>
     );

@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import SideBarBtnEntry from './SideBarBtnEntry.jsx';
+import React, { useState, useEffect } from "react";
+import SideBarBtnEntry from "./SideBarBtnEntry.jsx";
 
-const SideBarBtnList = ({ currentTab, setCurrentTab, clickIssueViewHandler, clickProjectHomeHandler, clickDashboardHandler, clickNewIssueViewHandler }) => {
+const SideBarBtnList = ({
+  setSelectedIssue,
+  currentTab,
+  setCurrentTab,
+  clickIssueViewHandler,
+  clickProjectHomeHandler,
+  clickDashboardHandler,
+  clickNewIssueViewHandler
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const hoverHandler = (value) => {
+  const hoverHandler = value => {
     setIsHovered(value);
   };
 
-  const buttonTypes = ['home', 'add', 'storage'];
+  const buttonTypes = ["home", "add", "storage"];
 
   let content = (
     <>
@@ -18,24 +26,34 @@ const SideBarBtnList = ({ currentTab, setCurrentTab, clickIssueViewHandler, clic
         onMouseLeave={() => hoverHandler(false)}
         onClick={() => clickDashboardHandler()}
       >
-        <i className="sideIcon material-icons" style={{ color: isHovered ? '#4CAF93' : 'white' }}>business</i>
-        <div className="sidebtnTxt" style={{ color: isHovered ? '#4CAF93' : 'white' }}>Dashboard</div>
+        <i
+          className="sideIcon material-icons"
+          style={{ color: isHovered ? "#4CAF93" : "white" }}
+        >
+          business
+        </i>
+        <div
+          className="sidebtnTxt"
+          style={{ color: isHovered ? "#4CAF93" : "white" }}
+        >
+          Dashboard
+        </div>
       </li>
-      <li><div className="divider" style={{ margin: '0' }} /></li>
-      {
-        buttonTypes.map((type) => (
-          <SideBarBtnEntry
-            key={type}
-            currentTab={currentTab}
-            setCurrentTab={setCurrentTab}
-            clickProjectHomeHandler={clickProjectHomeHandler}
-            clickNewIssueViewHandler={clickNewIssueViewHandler}
-            clickIssueViewHandler={clickIssueViewHandler}
-            type={type}
-          />
-        ))
-      }
-
+      <li>
+        <div className="divider" style={{ margin: "0" }} />
+      </li>
+      {buttonTypes.map(type => (
+        <SideBarBtnEntry
+          key={type}
+          currentTab={currentTab}
+          setSelectedIssue={setSelectedIssue}
+          setCurrentTab={setCurrentTab}
+          clickProjectHomeHandler={clickProjectHomeHandler}
+          clickNewIssueViewHandler={clickNewIssueViewHandler}
+          clickIssueViewHandler={clickIssueViewHandler}
+          type={type}
+        />
+      ))}
     </>
   );
   return content;

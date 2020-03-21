@@ -6,6 +6,7 @@ const ProjectHome = props => {
   let content = (
     <>
       <SideBarContainer
+        setSelectedIssue={props.setSelectedIssue}
         currentTab={props.currentTab}
         setCurrentTab={props.setCurrentTab}
         clickProjectHomeHandler={props.clickProjectHomeHandler}

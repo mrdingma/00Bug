@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import IssuesListEntry from './IssuesListEntry.jsx';
+import React, { useEffect, useState } from "react";
+import IssuesListEntry from "./ProjectIssuesListEntry.jsx";
 
-const ProjectIssuesListContainer = (props) => {
-
+const ProjectIssuesListContainer = ({ setSelectedIssue }) => {
   let content = (
     <div className="responsive-table collapsible">
       <table className="highlight centered responsive-table">
@@ -21,9 +20,13 @@ const ProjectIssuesListContainer = (props) => {
           </tr>
         </thead>
         <tbody>
-          {
-            props.issuesByProject.map((issue) => <IssuesListEntry key={issue.id} issue={issue} />)
-          }
+          {props.issuesByProject.map(issue => (
+            <IssuesListEntry
+              setSelectedIssue={setSelectedIssue}
+              key={issue.id}
+              issue={issue}
+            />
+          ))}
         </tbody>
       </table>
     </div>
