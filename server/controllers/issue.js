@@ -27,6 +27,15 @@ async function getAllByUserAndProject(userId, project) {
   });
 }
 
+async function addComment(_id, status, comment) {
+  const query = { _id };
+  const update = {
+    $set: { status },
+    $push: { comments: comment }
+  };
+  return IssueModel.findOneAndUpdate(query, update);
+}
+
 async function update(issueId, data) {
   const item = await getOne(issueId);
 
@@ -42,6 +51,7 @@ async function update(issueId, data) {
 
 module.exports = {
   addNew,
+  addComment,
   getOne,
   update,
   deleteOne,

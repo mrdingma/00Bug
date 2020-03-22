@@ -68,6 +68,30 @@ module.exports = () => {
     }
   });
 
+  // PUT add comment to an issue
+  router.put(
+    "/:issueid/comment",
+    parser.single("image"),
+    async (req, res, next) => {
+      try {
+        const comment = {
+          userId: req.body.userId,
+          text: req.body.text,
+          attachment: req.file ? req.file.url : ""
+        };
+
+        const updatedIssue = await issue_controller.addComment(
+          req.params.issueid,
+          req.body.status,
+          comment
+        );
+        return res.send(updatedIssue);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+
   router.put("/:issueid", async (req, res, next) => {
     try {
       const updateIssue = await issue_controller.update(req.body);
