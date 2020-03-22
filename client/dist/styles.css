@@ -70,3 +70,23 @@ th {
 .dropdown-content {
   top: 100% !important;
 }
+
+.comment-box {
+  border: 1px solid darkgrey !important;
+  border-radius: 3px !important;
+  padding-left: 0.5em !important;
+}
+
+.comment-attach {
+  font-size: 2em;
+  margin-right: 0.5em;
+  cursor: pointer;
+}
+
+.input-field {
+  width: 100% !important;
+}
+
+tr {
+  font-size: 12px;
+}
