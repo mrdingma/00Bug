@@ -26,7 +26,8 @@ const IssueSchema = new Schema({
       userId: String,
       text: String,
       date: { type: Date, default: Date.now },
-      attachment: String
+      attachment: String,
+      picture: String
     }
   ]
 });
