@@ -14,17 +14,21 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
   const [attachment, setAttachment] = useState("");
   const [confirmScreen, setConfirmScreen] = useState(false);
 
-  useEffect(() => {
-    const elems = document.querySelectorAll("select");
-    M.FormSelect.init(elems, {});
-    M.textareaAutoResize($("#textarea1"));
-  });
-
   const dueDateHandler = d => {
     setDueDate(date.format(d, "YYYY-MM-DD"));
   };
 
   const { user } = useAuth0();
+
+  const attachmentHandler = e => {
+    const file = e.target.files[0];
+
+    if (file.type !== "jpg" || file.type !== "png") {
+      alert("Only acceptable formats are JPG or PNG format");
+    } else {
+      setAttachment(file);
+    }
+  };
 
   const clickHandler = () => {
     const payload = new FormData();
@@ -44,6 +48,16 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
     setAttachment("");
     setConfirmScreen(true);
   };
+
+  useEffect(() => {
+    const elems = document.querySelectorAll("select");
+    M.FormSelect.init(elems, {});
+    M.textareaAutoResize($("#textarea1"));
+  });
+
+  useEffect(() => {
+    setAssignee(user.name);
+  }, []);
 
   let content = (
     <>
@@ -169,7 +183,7 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
                         <span>Attach</span>
                         <input
                           type="file"
-                          onChange={e => setAttachment(e.target.files[0])}
+                          onChange={e => attachmentHandler(e)}
                         />
                       </div>
                       <div className="file-path-wrapper">
