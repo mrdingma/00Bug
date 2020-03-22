@@ -162,6 +162,20 @@ const Home = props => {
       });
   };
 
+  const getIssue = id => {
+    const url = `/issues?id=${id}`;
+
+    axios
+      .get(url)
+      .then(({ data }) => {
+        debugger;
+        setSelectedIssue(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const deleteIssue = id => {
     const url = `/issues/${id}`;
 
@@ -169,6 +183,20 @@ const Home = props => {
       .delete(url)
       .then(res => {
         getAllIssues();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const addComment = d => {
+    const url = `/issues/${selectedIssue._id}/comment`;
+
+    axios
+      .put(url, d)
+      .then(data => {
+        getAllIssuesByProject({ name: currentProject });
+        getIssue(selectedIssue._id);
       })
       .catch(err => {
         console.log(err);
@@ -302,6 +330,7 @@ const Home = props => {
         </div>
         <div className="col s6 m8 l10" style={{ marginTop: "7%" }}>
           <ProjectIssuesListContainer
+            addComment={addComment}
             selectedIssue={selectedIssue}
             setSelectedIssue={setSelectedIssue}
             issuesByProject={issuesByProject}

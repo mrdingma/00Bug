@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import IssuesListEntry from "./ProjectIssuesListEntry.jsx";
-import ProjectIssue from "./ProjectIssue.jsx";
+import ProjectSingleIssue from "./ProjectSingleIssue.jsx";
 
 const ProjectIssuesListContainer = ({
   selectedIssue,
   setSelectedIssue,
-  issuesByProject
+  issuesByProject,
+  addComment
 }) => {
   let content = (
     <div className="responsive-table collapsible">
@@ -38,7 +39,12 @@ const ProjectIssuesListContainer = ({
   );
 
   if (selectedIssue) {
-    content = <ProjectIssue selectedIssue={selectedIssue} />;
+    content = (
+      <ProjectSingleIssue
+        addComment={addComment}
+        selectedIssue={selectedIssue}
+      />
+    );
   }
 
   return content;
