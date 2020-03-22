@@ -24,13 +24,13 @@ const NewIssueForm = ({ currentProject, addIssue, friends }) => {
     const file = e.target.files[0];
 
     if (
-      file.type !== "image/jpeg" ||
-      file.type !== "image/png" ||
-      file.type !== "image/jpeg"
+      file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "image/jpeg"
     ) {
-      alert("Only acceptable formats are JPG or PNG format");
-    } else {
       setAttachment(file);
+    } else {
+      alert("Only acceptable formats are JPG or PNG format");
     }
   };
 
