@@ -87,7 +87,8 @@ module.exports = () => {
         const comment = {
           userId: req.body.userId,
           text: req.body.text,
-          attachment: req.file ? req.file.url : ""
+          attachment: req.file ? req.file.url : "",
+          picture: req.body.picture
         };
 
         const updatedIssue = await issue_controller.addComment(
