@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import IssuesListEntry from './IssuesListEntry.jsx';
+import React, { useEffect, useState } from "react";
+import IssuesListEntry from "./IssuesListEntry.jsx";
 
-const IssuesList = (props) => {
+const IssuesList = props => {
   const content = (
     <div className="responsive-table collapsible">
       <table className="highlight centered">
@@ -14,14 +14,21 @@ const IssuesList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {
-            props.issues.map((issue) => {
-              if (issue.status !== 'closed') {
-                return <IssuesListEntry key={issue.id} issue={issue} />;
-              }
-              return null;
-            })
-          }
+          {props.issues.map(issue => {
+            if (issue.status !== "closed") {
+              return (
+                <IssuesListEntry
+                  key={issue.id}
+                  issue={issue}
+                  setCurrentTab={props.setCurrentTab}
+                  setSelectedIssue={props.setSelectedIssue}
+                  clickIssueViewHandler={props.clickIssueViewHandler}
+                  getAllIssuesByProject={props.getAllIssuesByProject}
+                />
+              );
+            }
+            return null;
+          })}
         </tbody>
       </table>
     </div>

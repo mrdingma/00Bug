@@ -26,10 +26,6 @@ const Home = props => {
   const [friends, setFriends] = useState([]);
   const { user } = useAuth0();
 
-  const switchTabHandler = page => {
-    setCurrentTab(page);
-  };
-
   const clickDashboardHandler = () => {
     setIsDashboardView(true);
     setIsProjectHomeView(false);
@@ -245,7 +241,13 @@ const Home = props => {
           <RecentUpdatesContainer />
         </div>
         <div className="row">
-          <IssuesListContainer issues={issuesList} />
+          <IssuesListContainer
+            issues={issuesList}
+            setCurrentTab={setCurrentTab}
+            setSelectedIssue={setSelectedIssue}
+            clickIssueViewHandler={clickIssueViewHandler}
+            getAllIssuesByProject={getAllIssuesByProject}
+          />
         </div>
       </>
     );
