@@ -35,6 +35,16 @@ module.exports = () => {
     }
   });
 
+  //GET issues by _id
+  router.get("/", async (req, res, next) => {
+    try {
+      const issue = await issue_controller.getOne(req.query.id);
+      return res.send(issue);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
   // GET issues by userId and projectId
   router.get("/user/:userid/project/:projectName", async (req, res, next) => {
     try {
