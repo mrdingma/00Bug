@@ -16,7 +16,7 @@ const RecentUpdatesList = ({ currentTab, currentProject, updatesList }) => {
     <>
       <table className="responsive-table collapsible">
         <thead>
-          {updatesList.reverse().map(update => (
+          {updatesList.map(update => (
             <>
               <tr style={{ backgroundColor: "#F5F5F5" }}>
                 <th>
