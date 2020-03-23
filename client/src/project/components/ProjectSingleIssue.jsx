@@ -67,11 +67,14 @@ const ProjectSingleIssue = ({ selectedIssue, addComment }) => {
   let content = (
     <>
       <div className="row">
-        <div className="col s1-offset s9">
+        <div className="col s1-offset s8">
           <IssueTypeTag issue={selectedIssue} />
           <span style={{ marginLeft: ".5em" }}>{selectedIssue.summary}</span>
         </div>
-        <div className="col s3">
+        <div
+          className="col s4"
+          style={{ display: "flex", justifyContent: "flex-end" }}
+        >
           <span style={{ color: "red" }}>Due date </span>
           <span style={{ marginLeft: ".5em", color: "red" }}>
             {dateParse(selectedIssue.due_date)}
