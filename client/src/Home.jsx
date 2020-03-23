@@ -26,6 +26,7 @@ const Home = props => {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [currentTab, setCurrentTab] = useState("dashboard");
   const [friends, setFriends] = useState([]);
+  const [showMore, setShowMore] = useState(false);
   const { user } = useAuth0();
 
   const clickDashboardHandler = () => {
@@ -64,7 +65,7 @@ const Home = props => {
     axios
       .get(url)
       .then(({ data }) => {
-        setUpdatesList(data);
+        setUpdatesList(data.reverse());
       })
       .catch(err => {
         console.log(err);
@@ -348,6 +349,17 @@ const Home = props => {
                 getAllIssuesByProject={getAllIssuesByProject}
               />
             </div>
+            {issuesList.length > 10 && (
+              <div
+                className="col s12"
+                style={{ padding: 0 }}
+                onClick={() => setShowMore(!showMore)}
+              >
+                <i class="material-icons">
+                  {setShowMore ? "arrow_drop_down" : "arrow_drop_up"}
+                </i>
+              </div>
+            )}
           </div>
 
           <div className="col s5">
