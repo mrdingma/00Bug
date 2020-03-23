@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import IssuesList from "./IssuesList.jsx";
+import M from "materialize-css/dist/js/materialize.min.js";
+import IssuesListEntry from "./IssuesListEntry.jsx";
 
 const IssuesListContainer = props => {
   const [isClicked, setIsClicked] = useState(false);
@@ -8,36 +9,56 @@ const IssuesListContainer = props => {
     setIsClicked(!isClicked);
   };
 
+  useEffect(() => {
+    const elems = document.querySelectorAll(".collapsible");
+    M.Collapsible.init(elems, {});
+  });
+
   let content = (
     <ul>
       <li>
-        <div onClick={onClickHandler}>
-          <i className="material-icons">keyboard_arrow_up</i>
-          My Issues
-        </div>
-        <IssuesList
-          issues={props.issues}
-          setCurrentTab={props.setCurrentTab}
-          setSelectedIssue={props.setSelectedIssue}
-          clickIssueViewHandler={props.clickIssueViewHandler}
-          getAllIssuesByProject={props.getAllIssuesByProject}
-        />
+        <ul class="collapsible">
+          <li className="active">
+            <div class="collapsible-header" onClick={onClickHandler}>
+              <i class="material-icons">
+                {isClicked ? "arrow_drop_down" : "arrow_drop_up"}
+              </i>
+              My Issues
+            </div>
+            <div class="collapsible-body">
+              <table className="highlight centered">
+                <thead className="grey lighten-4">
+                  <tr>
+                    <th scope="col">Status</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Due</th>
+                    <th scope="col">Subject</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {props.issues.map(issue => {
+                    if (issue.status !== "closed") {
+                      return (
+                        <IssuesListEntry
+                          key={issue.id}
+                          issue={issue}
+                          setCurrentTab={props.setCurrentTab}
+                          setSelectedIssue={props.setSelectedIssue}
+                          clickIssueViewHandler={props.clickIssueViewHandler}
+                          getAllIssuesByProject={props.getAllIssuesByProject}
+                        />
+                      );
+                    }
+                    return null;
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </li>
+        </ul>
       </li>
     </ul>
   );
-
-  if (isClicked) {
-    content = (
-      <ul>
-        <li>
-          <div onClick={onClickHandler}>
-            <i className="material-icons">keyboard_arrow_down</i>
-            My Issues
-          </div>
-        </li>
-      </ul>
-    );
-  }
 
   return content;
 };
