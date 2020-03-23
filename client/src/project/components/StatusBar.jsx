@@ -23,43 +23,39 @@ const StatusBar = ({ issuesByProject }) => {
 
   const content = (
     <>
-      <div className="col s5 offset-s1">Status</div>
-      <div className="col s5 offset-s1 progress" style={{ padding: 0 }}>
+      <div className="col s12 status-title" style={{ marginBottom: "0.5em" }}>
+        Status
+      </div>
+      <div
+        className="col s12"
+        style={{ padding: 0, display: "flex", marginBottom: "0.5em" }}
+      >
         <div
-          className="progress-bar progress-bar-open"
-          role="progressbar"
-          style={{ width: `${calc().open ? calc().open.percent : 0}%` }}
-        >
-          Open
-        </div>
+          className="progress-bar-open"
+          style={{
+            width: `${calc().open ? calc().open.percent : 0}%`,
+            height: "0.5em"
+          }}
+        ></div>
         <div
-          className="progress-bar progress-bar-in-progress"
-          role="progressbar"
+          className="progress-bar-in-progress"
           style={{
             width: `${calc().in_progress ? calc().in_progress.percent : 0}%`
           }}
-        >
-          In Progress
-        </div>
+        ></div>
         <div
-          className="progress-bar progress-bar-resolved"
-          role="progressbar"
+          className="progress-bar-resolved"
           style={{
             width: `${calc().resolved ? calc().resolved.percent : 0}%`
           }}
-        >
-          Resolved
-        </div>
+        ></div>
         <div
-          className="progress-bar progress-bar-closed"
-          role="progressbar"
+          className="progress-bar-closed"
           style={{ width: `${calc().closed ? calc().closed.percent : 0}%` }}
-        >
-          Closed
-        </div>
+        ></div>
       </div>
       <div
-        className="col s5 offset-s1"
+        className="col s12"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
         <div>
