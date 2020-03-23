@@ -20,6 +20,7 @@ const Home = props => {
   const [currentProject, setCurrentProject] = useState("");
   const [issuesByProject, setIssuesByProject] = useState(null);
   const [projectList, setProjectList] = useState(null);
+  const [updatesList, setUpdatesList] = useState(null);
   const [issuesList, setIssuesList] = useState(null);
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [currentTab, setCurrentTab] = useState("dashboard");
@@ -27,6 +28,7 @@ const Home = props => {
   const { user } = useAuth0();
 
   const clickDashboardHandler = () => {
+    setCurrentTab("dashboard");
     setIsDashboardView(true);
     setIsProjectHomeView(false);
     setIsNewIssueView(false);
@@ -54,6 +56,20 @@ const Home = props => {
     setIsIssueView(false);
   };
 
+  // UPDATES AXIOS
+  const getAllUpdates = () => {
+    const url = `/updates/user/${user.name}`;
+
+    axios
+      .get(url)
+      .then(({ data }) => {
+        setUpdatesList(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   // USER FRIENDS AXIOS
   const getAllFriends = () => {
     const url = `/friends/user/${user.name}`;
@@ -79,6 +95,22 @@ const Home = props => {
       .post(url, params)
       .then(({ data }) => {
         setFriends(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    const params2 = {
+      userId: user.name,
+      type: "Added a new user",
+      text: `${email}`,
+      assignee: email
+    };
+
+    axios
+      .post("/updates", params2)
+      .then(({ data }) => {
+        getAllUpdates();
       })
       .catch(err => {
         console.log(err);
@@ -113,6 +145,22 @@ const Home = props => {
       })
       .catch(err => {
         console.log(error);
+      });
+
+    const params2 = {
+      userId: user.name,
+      type: "Added a new project",
+      text: name,
+      project: name
+    };
+
+    axios
+      .post("/updates", params2)
+      .then(({ data }) => {
+        getAllUpdates();
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
@@ -152,6 +200,24 @@ const Home = props => {
       .then(({ data }) => {
         setIssuesList([...issuesList, data]);
         getAllIssuesByProject({ name: currentProject });
+
+        const params2 = {
+          userId: user.name,
+          type: "Added a new issue",
+          text: data.summary,
+          attachment: data.attachment,
+          project: data.project,
+          assignee: data.assignee
+        };
+
+        axios
+          .post("/updates", params2)
+          .then(({ data }) => {
+            getAllUpdates();
+          })
+          .catch(err => {
+            console.log(err);
+          });
       })
       .catch(err => {
         console.log(err);
@@ -164,7 +230,6 @@ const Home = props => {
     axios
       .get(url)
       .then(({ data }) => {
-        debugger;
         setSelectedIssue(data);
       })
       .catch(err => {
@@ -190,9 +255,30 @@ const Home = props => {
 
     axios
       .put(url, d)
-      .then(data => {
+      .then(({ data }) => {
         getAllIssuesByProject({ name: currentProject });
         getIssue(selectedIssue._id);
+
+        const newComment = data.comments[data.comments.length - 1];
+        const params2 = {
+          userId: user.name,
+          type: `Comment added`,
+          text: newComment.text,
+          attachment: newComment.attachment,
+          project: data.project,
+          assignee: data.assignee
+        };
+
+        debugger;
+
+        axios
+          .post("/updates", params2)
+          .then(({ data }) => {
+            getAllUpdates();
+          })
+          .catch(err => {
+            console.log(err);
+          });
       })
       .catch(err => {
         console.log(err);
@@ -203,6 +289,7 @@ const Home = props => {
     getAllProjects();
     getAllIssues();
     getAllFriends();
+    getAllUpdates();
   }, []);
 
   let content = (
@@ -224,30 +311,46 @@ const Home = props => {
   );
 
   // Dashboard Main Page
-  if (isDashboardView && projectList !== null && issuesList !== null) {
+  if (
+    isDashboardView &&
+    projectList !== null &&
+    issuesList !== null &&
+    updatesList !== null
+  ) {
     content = (
       <>
         <Header addFriend={addFriend} addProject={addProject} />
         <div className="row">
-          <ProjectList
-            setSelectedIssue={setSelectedIssue}
-            setCurrentTab={setCurrentTab}
-            projects={projectList}
-            getAllIssuesByProject={getAllIssuesByProject}
-            clickProjectHomeHandler={clickProjectHomeHandler}
-            clickIssueViewHandler={clickIssueViewHandler}
-            clickNewIssueViewHandler={clickNewIssueViewHandler}
-          />
-          <RecentUpdatesContainer />
-        </div>
-        <div className="row">
-          <IssuesListContainer
-            issues={issuesList}
-            setCurrentTab={setCurrentTab}
-            setSelectedIssue={setSelectedIssue}
-            clickIssueViewHandler={clickIssueViewHandler}
-            getAllIssuesByProject={getAllIssuesByProject}
-          />
+          <div className="col s5 offset-s1">
+            <div className="row">
+              <ProjectList
+                setSelectedIssue={setSelectedIssue}
+                setCurrentTab={setCurrentTab}
+                projects={projectList}
+                getAllIssuesByProject={getAllIssuesByProject}
+                clickProjectHomeHandler={clickProjectHomeHandler}
+                clickIssueViewHandler={clickIssueViewHandler}
+                clickNewIssueViewHandler={clickNewIssueViewHandler}
+              />
+            </div>
+            <div className="col s12" style={{ padding: 0 }}>
+              <IssuesListContainer
+                issues={issuesList}
+                setCurrentTab={setCurrentTab}
+                setSelectedIssue={setSelectedIssue}
+                clickIssueViewHandler={clickIssueViewHandler}
+                getAllIssuesByProject={getAllIssuesByProject}
+              />
+            </div>
+          </div>
+
+          <div className="col s5">
+            <RecentUpdatesContainer
+              currentProject={currentProject}
+              updatesList={updatesList}
+              currentTab={currentTab}
+            />
+          </div>
         </div>
       </>
     );
@@ -257,7 +360,7 @@ const Home = props => {
   if (isProjectHomeView && issuesByProject !== null) {
     content = (
       <>
-        <div class="row">
+        <div className="row">
           <ProjectHeader class="col s12 m4 l1">
             <div>{currentProject}</div>
           </ProjectHeader>
@@ -272,8 +375,17 @@ const Home = props => {
               clickIssueViewHandler={clickIssueViewHandler}
             />
           </div>
-          <div className="col s12 m8 l10" style={{ marginTop: "7%" }}>
-            <RecentUpdatesContainer />
+        </div>
+        <div className="row">
+          <div className="col s5 offset-s1" style={{ marginTop: "2.5em" }}>
+            <RecentUpdatesContainer
+              currentProject={currentProject}
+              updatesList={updatesList}
+              currentTab={currentTab}
+            />
+          </div>
+
+          <div className="col s5 status-box">
             <StatusBar issuesByProject={issuesByProject} />
           </div>
         </div>
