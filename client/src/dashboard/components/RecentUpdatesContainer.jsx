@@ -12,24 +12,30 @@ const RecentUpdatesContainer = ({
     setIsClicked(!isClicked);
   };
 
-  let content = (
+  const content = (
     <ul>
       <li>
-        <div onClick={onClickHandler}>
-          {isClicked ? (
-            <i className="material-icons">keyboard_arrow_down</i>
-          ) : (
-            <i className="material-icons">keyboard_arrow_up</i>
-          )}
-          Recent Updates
-        </div>
-        {isClicked ? null : (
-          <RecentUpdatesList
-            currentProject={currentProject}
-            updatesList={updatesList}
-            currentTab={currentTab}
-          />
-        )}
+        <ul class="collapsible" style={{ boxShadow: "none", border: "none" }}>
+          <li className="active">
+            <div
+              class="collapsible-header"
+              onClick={onClickHandler}
+              style={{ border: "none" }}
+            >
+              <i class="material-icons">
+                {isClicked ? "arrow_drop_down" : "arrow_drop_up"}
+              </i>
+              Recent Updates
+            </div>
+            <div class="collapsible-body" style={{ border: "none" }}>
+              <RecentUpdatesList
+                currentProject={currentProject}
+                updatesList={updatesList}
+                currentTab={currentTab}
+              />
+            </div>
+          </li>
+        </ul>
       </li>
     </ul>
   );

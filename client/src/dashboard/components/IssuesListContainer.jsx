@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import M from "materialize-css/dist/js/materialize.min.js";
 import IssuesListEntry from "./IssuesListEntry.jsx";
 
 const IssuesListContainer = props => {
@@ -9,23 +8,25 @@ const IssuesListContainer = props => {
     setIsClicked(!isClicked);
   };
 
-  useEffect(() => {
-    const elems = document.querySelectorAll(".collapsible");
-    M.Collapsible.init(elems, {});
-  });
-
   const content = (
     <ul>
       <li>
         <ul class="collapsible" style={{ boxShadow: "none", border: "none" }}>
           <li className="active">
-            <div class="collapsible-header" onClick={onClickHandler}>
+            <div
+              class="collapsible-header"
+              onClick={onClickHandler}
+              style={{ border: "none" }}
+            >
               <i class="material-icons">
                 {isClicked ? "arrow_drop_down" : "arrow_drop_up"}
               </i>
               My Issues
             </div>
-            <div class="collapsible-body" style={{ border: "1px solid #ddd" }}>
+            <div
+              class="collapsible-body issue-table"
+              style={{ border: "1px solid #ddd" }}
+            >
               <table className="highlight centered">
                 <thead className="grey lighten-4">
                   <tr>

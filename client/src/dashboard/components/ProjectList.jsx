@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import M from "materialize-css/dist/js/materialize.min.js";
 import ProjectListEntry from "./ProjectListEntry.jsx";
 
 const ProjectList = props => {
@@ -8,11 +7,6 @@ const ProjectList = props => {
   const onClickHandler = () => {
     setIsClicked(!isClicked);
   };
-
-  useEffect(() => {
-    const elems = document.querySelectorAll(".collapsible");
-    M.Collapsible.init(elems, {});
-  });
 
   const content = (
     <ul>
