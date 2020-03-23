@@ -17,7 +17,7 @@ const IssuesListContainer = props => {
   const content = (
     <ul>
       <li>
-        <ul class="collapsible">
+        <ul class="collapsible" style={{ boxShadow: "none", border: "none" }}>
           <li className="active">
             <div class="collapsible-header" onClick={onClickHandler}>
               <i class="material-icons">
@@ -25,7 +25,7 @@ const IssuesListContainer = props => {
               </i>
               My Issues
             </div>
-            <div class="collapsible-body">
+            <div class="collapsible-body" style={{ border: "1px solid #ddd" }}>
               <table className="highlight centered">
                 <thead className="grey lighten-4">
                   <tr>

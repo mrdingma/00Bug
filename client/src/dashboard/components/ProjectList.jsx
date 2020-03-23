@@ -19,13 +19,17 @@ const ProjectList = props => {
       <li>
         <ul class="collapsible" style={{ boxShadow: "none", border: "none" }}>
           <li className="active">
-            <div class="collapsible-header" onClick={onClickHandler}>
+            <div
+              class="collapsible-header"
+              onClick={onClickHandler}
+              style={{ border: "none" }}
+            >
               <i class="material-icons">
                 {isClicked ? "arrow_drop_down" : "arrow_drop_up"}
               </i>
               Projects
             </div>
-            <div class="collapsible-body">
+            <div class="collapsible-body" style={{ border: "none" }}>
               {props.projects.map(project => (
                 <ProjectListEntry
                   setSelectedIssue={props.setSelectedIssue}
