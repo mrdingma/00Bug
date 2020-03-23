@@ -9,42 +9,38 @@ const ProjectList = props => {
   };
 
   let content = (
-    <div className="col s5 offset-s1">
-      <ul>
-        <li>
-          <div onClick={onClickHandler}>
-            <i className="material-icons">keyboard_arrow_down</i>
-            Projects
-          </div>
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <li>
+        <div onClick={onClickHandler}>
+          <i className="material-icons">keyboard_arrow_down</i>
+          Projects
+        </div>
+      </li>
+    </ul>
   );
 
   if (!isClicked) {
     content = (
-      <div className="col s5 offset-s1">
-        <ul>
-          <li>
-            <div onClick={onClickHandler}>
-              <i className="material-icons">keyboard_arrow_up</i>
-              Projects
-            </div>
-            {props.projects.map(project => (
-              <ProjectListListEntry
-                setSelectedIssue={props.setSelectedIssue}
-                setCurrentTab={props.setCurrentTab}
-                key={project.id}
-                project={project}
-                getAllIssuesByProject={props.getAllIssuesByProject}
-                clickProjectHomeHandler={props.clickProjectHomeHandler}
-                clickIssueViewHandler={props.clickIssueViewHandler}
-                clickNewIssueViewHandler={props.clickNewIssueViewHandler}
-              />
-            ))}
-          </li>
-        </ul>
-      </div>
+      <ul>
+        <li>
+          <div onClick={onClickHandler}>
+            <i className="material-icons">keyboard_arrow_up</i>
+            Projects
+          </div>
+          {props.projects.map(project => (
+            <ProjectListListEntry
+              setSelectedIssue={props.setSelectedIssue}
+              setCurrentTab={props.setCurrentTab}
+              key={project.id}
+              project={project}
+              getAllIssuesByProject={props.getAllIssuesByProject}
+              clickProjectHomeHandler={props.clickProjectHomeHandler}
+              clickIssueViewHandler={props.clickIssueViewHandler}
+              clickNewIssueViewHandler={props.clickNewIssueViewHandler}
+            />
+          ))}
+        </li>
+      </ul>
     );
   }
 
