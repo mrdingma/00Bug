@@ -14,7 +14,7 @@ const IssuesListContainer = props => {
     M.Collapsible.init(elems, {});
   });
 
-  let content = (
+  const content = (
     <ul>
       <li>
         <ul class="collapsible">
