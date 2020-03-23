@@ -9,6 +9,7 @@ import NewIssueForm from "./project/components/NewIssueForm.jsx";
 import ProjectHeader from "./project/elements/projectHeader";
 import ProjectIssuesListContainer from "./project/components/ProjectIssuesListContainer.jsx";
 import StatusBar from "./project/components/StatusBar.jsx";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 import { useAuth0 } from "./auth0.jsx";
 
@@ -291,6 +292,11 @@ const Home = props => {
     getAllFriends();
     getAllUpdates();
   }, []);
+
+  useEffect(() => {
+    const elems = document.querySelectorAll(".collapsible");
+    M.Collapsible.init(elems, {});
+  });
 
   let content = (
     <div className="row">
