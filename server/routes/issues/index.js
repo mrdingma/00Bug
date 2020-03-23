@@ -91,11 +91,14 @@ module.exports = () => {
           picture: req.body.picture
         };
 
-        const updatedIssue = await issue_controller.addComment(
+        const updateIssue = await issue_controller.addComment(
           req.params.issueid,
           req.body.status,
           comment
         );
+
+        const updatedIssue = await issue_controller.getOne(req.params.issueid);
+
         return res.send(updatedIssue);
       } catch (err) {
         return next(err);
