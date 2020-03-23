@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ProjectListListEntry from "./ProjectListEntry.jsx";
+import M from "materialize-css/dist/js/materialize.min.js";
+import ProjectListEntry from "./ProjectListEntry.jsx";
 
 const ProjectList = props => {
   const [isClicked, setIsClicked] = useState(false);
@@ -8,41 +9,41 @@ const ProjectList = props => {
     setIsClicked(!isClicked);
   };
 
-  let content = (
+  useEffect(() => {
+    const elems = document.querySelectorAll(".collapsible");
+    M.Collapsible.init(elems, {});
+  });
+
+  const content = (
     <ul>
       <li>
-        <div onClick={onClickHandler}>
-          <i className="material-icons">keyboard_arrow_down</i>
-          Projects
-        </div>
+        <ul class="collapsible" style={{ boxShadow: "none", border: "none" }}>
+          <li className="active">
+            <div class="collapsible-header" onClick={onClickHandler}>
+              <i class="material-icons">
+                {isClicked ? "arrow_drop_down" : "arrow_drop_up"}
+              </i>
+              Projects
+            </div>
+            <div class="collapsible-body">
+              {props.projects.map(project => (
+                <ProjectListEntry
+                  setSelectedIssue={props.setSelectedIssue}
+                  setCurrentTab={props.setCurrentTab}
+                  key={project.id}
+                  project={project}
+                  getAllIssuesByProject={props.getAllIssuesByProject}
+                  clickProjectHomeHandler={props.clickProjectHomeHandler}
+                  clickIssueViewHandler={props.clickIssueViewHandler}
+                  clickNewIssueViewHandler={props.clickNewIssueViewHandler}
+                />
+              ))}
+            </div>
+          </li>
+        </ul>
       </li>
     </ul>
   );
-
-  if (!isClicked) {
-    content = (
-      <ul>
-        <li>
-          <div onClick={onClickHandler}>
-            <i className="material-icons">keyboard_arrow_up</i>
-            Projects
-          </div>
-          {props.projects.map(project => (
-            <ProjectListListEntry
-              setSelectedIssue={props.setSelectedIssue}
-              setCurrentTab={props.setCurrentTab}
-              key={project.id}
-              project={project}
-              getAllIssuesByProject={props.getAllIssuesByProject}
-              clickProjectHomeHandler={props.clickProjectHomeHandler}
-              clickIssueViewHandler={props.clickIssueViewHandler}
-              clickNewIssueViewHandler={props.clickNewIssueViewHandler}
-            />
-          ))}
-        </li>
-      </ul>
-    );
-  }
 
   return content;
 };
