@@ -2,16 +2,23 @@ import React, { useEffect, useState } from "react";
 import IssuesListEntry from "./IssuesListEntry.jsx";
 
 const IssuesListContainer = props => {
-  const [isClicked, setIsClicked] = useState(false);
-
   const onClickHandler = () => {
-    setIsClicked(!isClicked);
+    props.setIsIssuesExpanded(!props.isIssuesExpanded);
   };
 
+  let issuesArray = props.issues;
+
+  if (props.issues.length > 10 && !props.showMore) {
+    issuesArray = props.issues.slice(0, 10);
+  }
+
   const content = (
-    <ul>
+    <ul style={{ marginBottom: 0 }}>
       <li>
-        <ul class="collapsible" style={{ boxShadow: "none", border: "none" }}>
+        <ul
+          class="collapsible"
+          style={{ boxShadow: "none", border: "none", marginBottom: "2px" }}
+        >
           <li className="active">
             <div
               class="collapsible-header"
@@ -19,7 +26,7 @@ const IssuesListContainer = props => {
               style={{ border: "none" }}
             >
               <i class="material-icons">
-                {isClicked ? "arrow_drop_down" : "arrow_drop_up"}
+                {props.isIssuesExpanded ? "arrow_drop_down" : "arrow_drop_up"}
               </i>
               My Issues
             </div>
@@ -37,7 +44,7 @@ const IssuesListContainer = props => {
                   </tr>
                 </thead>
                 <tbody>
-                  {props.issues.map(issue => {
+                  {issuesArray.map(issue => {
                     if (issue.status !== "closed") {
                       return (
                         <IssuesListEntry

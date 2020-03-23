@@ -9,6 +9,7 @@ import NewIssueForm from "./project/components/NewIssueForm.jsx";
 import ProjectHeader from "./project/elements/projectHeader";
 import ProjectIssuesListContainer from "./project/components/ProjectIssuesListContainer.jsx";
 import StatusBar from "./project/components/StatusBar.jsx";
+import ShowMoreIssues from "./dashboard/components/ShowMoreIssues.jsx";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 import { useAuth0 } from "./auth0.jsx";
@@ -27,6 +28,7 @@ const Home = props => {
   const [currentTab, setCurrentTab] = useState("dashboard");
   const [friends, setFriends] = useState([]);
   const [showMore, setShowMore] = useState(false);
+  const [isIssuesExpanded, setIsIssuesExpanded] = useState(false);
   const { user } = useAuth0();
 
   const clickDashboardHandler = () => {
@@ -57,6 +59,8 @@ const Home = props => {
     setIsNewIssueView(true);
     setIsIssueView(false);
   };
+
+  console.log(showMore);
 
   // UPDATES AXIOS
   const getAllUpdates = () => {
@@ -340,8 +344,11 @@ const Home = props => {
                 clickNewIssueViewHandler={clickNewIssueViewHandler}
               />
             </div>
-            <div className="col s12" style={{ padding: 0 }}>
+            <div className="col s12" style={{ padding: 0, borderBottom: 0 }}>
               <IssuesListContainer
+                showMore={showMore}
+                isIssuesExpanded={isIssuesExpanded}
+                setIsIssuesExpanded={setIsIssuesExpanded}
                 issues={issuesList}
                 setCurrentTab={setCurrentTab}
                 setSelectedIssue={setSelectedIssue}
@@ -349,16 +356,17 @@ const Home = props => {
                 getAllIssuesByProject={getAllIssuesByProject}
               />
             </div>
-            {issuesList.length > 10 && (
-              <div
-                className="col s12"
-                style={{ padding: 0 }}
-                onClick={() => setShowMore(!showMore)}
-              >
-                <i class="material-icons">
-                  {setShowMore ? "arrow_drop_down" : "arrow_drop_up"}
-                </i>
-              </div>
+            {issuesList.length > 10 && !isIssuesExpanded && (
+              <ShowMoreIssues showMore={showMore} setShowMore={setShowMore} />
+              // <div
+              //   className="col s12 issues-show-arrow"
+              //   style={{ padding: 0, textAlign: "center" }}
+              //   onClick={() => setShowMore(!showMore)}
+              // >
+              //   <i class="material-icons">
+              //     {showMore ? "arrow_drop_up" : "arrow_drop_down"}
+              //   </i>
+              // </div>
             )}
           </div>
 
