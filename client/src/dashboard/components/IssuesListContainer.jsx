@@ -9,37 +9,33 @@ const IssuesListContainer = props => {
   };
 
   let content = (
-    <div className="col s5 offset-s1">
-      <ul>
-        <li>
-          <div onClick={onClickHandler}>
-            <i className="material-icons">keyboard_arrow_up</i>
-            My Issues
-          </div>
-          <IssuesList
-            issues={props.issues}
-            setCurrentTab={props.setCurrentTab}
-            setSelectedIssue={props.setSelectedIssue}
-            clickIssueViewHandler={props.clickIssueViewHandler}
-            getAllIssuesByProject={props.getAllIssuesByProject}
-          />
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <li>
+        <div onClick={onClickHandler}>
+          <i className="material-icons">keyboard_arrow_up</i>
+          My Issues
+        </div>
+        <IssuesList
+          issues={props.issues}
+          setCurrentTab={props.setCurrentTab}
+          setSelectedIssue={props.setSelectedIssue}
+          clickIssueViewHandler={props.clickIssueViewHandler}
+          getAllIssuesByProject={props.getAllIssuesByProject}
+        />
+      </li>
+    </ul>
   );
 
   if (isClicked) {
     content = (
-      <div className="col s5 offset-s1">
-        <ul>
-          <li>
-            <div onClick={onClickHandler}>
-              <i className="material-icons">keyboard_arrow_down</i>
-              My Issues
-            </div>
-          </li>
-        </ul>
-      </div>
+      <ul>
+        <li>
+          <div onClick={onClickHandler}>
+            <i className="material-icons">keyboard_arrow_down</i>
+            My Issues
+          </div>
+        </li>
+      </ul>
     );
   }
 
