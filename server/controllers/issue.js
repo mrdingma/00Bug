@@ -18,6 +18,12 @@ async function getAllByUser(userId) {
   return IssueModel.find({ $or: [{ userId }, { assignee: userId }] });
 }
 
+async function getAllByUserSorted(userId, option) {
+  return IssueModel.find({ $or: [{ userId }, { assignee: userId }] }).sort({
+    due_date: option
+  });
+}
+
 async function getAllByUserAndProject(userId, project) {
   return IssueModel.find({
     $or: [
@@ -56,5 +62,6 @@ module.exports = {
   update,
   deleteOne,
   getAllByUser,
-  getAllByUserAndProject
+  getAllByUserAndProject,
+  getAllByUserSorted
 };

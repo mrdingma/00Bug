@@ -28,7 +28,16 @@ module.exports = () => {
   // GET issues by userId
   router.get("/user/:userid", async (req, res, next) => {
     try {
-      const issues = await issue_controller.getAllByUser(req.params.userid);
+      let issues;
+
+      if (Object.keys(req.query).length > 0) {
+        issues = await issue_controller.getAllByUserSorted(
+          req.params.userid,
+          Number(req.query.due_date)
+        );
+        return res.send(issues);
+      }
+      issues = await issue_controller.getAllByUser(req.params.userid);
       return res.send(issues);
     } catch (err) {
       return next(err);
