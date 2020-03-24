@@ -31,18 +31,27 @@ const RecentUpdatesList = ({ currentTab, currentProject, updatesList }) => {
               <tr>
                 <Collection>
                   <CollectionItem className="avatar">
-                    <span
-                      className="title"
-                      style={{ borderBottom: "1px solid black" }}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between"
+                      }}
                     >
-                      {update.type}
-                    </span>
-                    <span style={{ marginLeft: "16.5em" }}>
-                      {moment(
-                        new Date(update.created_date),
-                        "ddd MMM DD YYYY HH:mm:ss GMT Z"
-                      ).fromNow()}
-                    </span>
+                      <div
+                        className="title"
+                        style={{
+                          borderBottom: "1px solid black"
+                        }}
+                      >
+                        {update.type}
+                      </div>
+                      <div>
+                        {moment(
+                          new Date(update.created_date),
+                          "ddd MMM DD YYYY HH:mm:ss GMT Z"
+                        ).fromNow()}
+                      </div>
+                    </div>
                     <div>
                       {update.text}
                       <br />
