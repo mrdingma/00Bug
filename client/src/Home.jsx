@@ -29,6 +29,7 @@ const Home = props => {
   const [friends, setFriends] = useState([]);
   const [showMore, setShowMore] = useState(false);
   const [isIssuesExpanded, setIsIssuesExpanded] = useState(false);
+  const [dueDateFilter, setDueDateFilter] = useState(false);
   const { user } = useAuth0();
 
   const clickDashboardHandler = () => {
@@ -176,6 +177,33 @@ const Home = props => {
       .get(url)
       .then(({ data }) => {
         setIssuesList(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const getAllIssuesSortByDueDate = option => {
+    const url = `/issues/user/${user.name}?due_date=${option}`;
+
+    axios
+      .get(url)
+      .then(({ data }) => {
+        const due_date_arr = data.map(issue => issue.due_date);
+        const nullIndex = due_date_arr.indexOf(null);
+        let dateIndex;
+
+        for (let i = 0; i < due_date_arr.length; i += 1) {
+          if (due_date_arr[i] !== null) {
+            dateIndex = i;
+            break;
+          }
+        }
+        if (option === 1) {
+          setIssuesList(data.slice(dateIndex).concat(data.slice(0, dateIndex)));
+        } else {
+          setIssuesList(data.slice(nullIndex).concat(data.slice(0, nullIndex)));
+        }
       })
       .catch(err => {
         console.log(err);
@@ -345,26 +373,20 @@ const Home = props => {
             <div className="col s12" style={{ padding: 0, borderBottom: 0 }}>
               <IssuesListContainer
                 showMore={showMore}
+                dueDateFilter={dueDateFilter}
+                setDueDateFilter={setDueDateFilter}
                 isIssuesExpanded={isIssuesExpanded}
                 setIsIssuesExpanded={setIsIssuesExpanded}
                 issues={issuesList}
                 setCurrentTab={setCurrentTab}
                 setSelectedIssue={setSelectedIssue}
+                getAllIssuesSortByDueDate={getAllIssuesSortByDueDate}
                 clickIssueViewHandler={clickIssueViewHandler}
                 getAllIssuesByProject={getAllIssuesByProject}
               />
             </div>
             {issuesList.length > 10 && !isIssuesExpanded && (
               <ShowMoreIssues showMore={showMore} setShowMore={setShowMore} />
-              // <div
-              //   className="col s12 issues-show-arrow"
-              //   style={{ padding: 0, textAlign: "center" }}
-              //   onClick={() => setShowMore(!showMore)}
-              // >
-              //   <i class="material-icons">
-              //     {showMore ? "arrow_drop_up" : "arrow_drop_down"}
-              //   </i>
-              // </div>
             )}
           </div>
 
