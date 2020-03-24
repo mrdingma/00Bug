@@ -6,6 +6,16 @@ const IssuesListContainer = props => {
     props.setIsIssuesExpanded(!props.isIssuesExpanded);
   };
 
+  const dueDateClickHandler = () => {
+    if (props.dueDateFilter === 1) {
+      props.setDueDateFilter(-1);
+      props.getAllIssuesSortByDueDate(-1);
+    } else {
+      props.setDueDateFilter(1);
+      props.getAllIssuesSortByDueDate(1);
+    }
+  };
+
   let issuesArray = props.issues;
 
   if (props.issues.length > 10 && !props.showMore) {
@@ -39,7 +49,28 @@ const IssuesListContainer = props => {
                   <tr>
                     <th scope="col">Status</th>
                     <th scope="col">Priority</th>
-                    <th scope="col">Due</th>
+                    <th scope="col" onClick={dueDateClickHandler}>
+                      <div
+                        style={{
+                          display: "flex",
+                          placeContent: "center",
+                          alignItems: "center",
+                          cursor: "pointer"
+                        }}
+                        className="filter-issue"
+                      >
+                        <div>Due</div>
+                        {props.dueDateFilter && (
+                          <div>
+                            <i class="material-icons due-date-arrow">
+                              {props.dueDateFilter === 1
+                                ? "arrow_drop_up"
+                                : "arrow_drop_down"}
+                            </i>
+                          </div>
+                        )}
+                      </div>
+                    </th>
                     <th scope="col">Subject</th>
                   </tr>
                 </thead>
