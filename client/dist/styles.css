@@ -117,3 +117,12 @@ tr {
   border-radius: 0.5em;
   cursor: pointer;
 }
+
+.filter-issue:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.due-date-arrow {
+  color: #5eb5a6;
+}
