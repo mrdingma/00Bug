@@ -60,8 +60,6 @@ const Home = props => {
     setIsIssueView(false);
   };
 
-  console.log(showMore);
-
   // UPDATES AXIOS
   const getAllUpdates = () => {
     const url = `/updates/user/${user.name}`;
