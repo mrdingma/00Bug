@@ -46,7 +46,7 @@ const ProjectListEntry = props => {
               style={{ cursor: "pointer", width: "100%" }}
               onClick={clickHandler}
             >
-              {props.project.name}
+              {props.project}
             </div>
             {isHovered ? (
               <ProjectListButtons
