@@ -25,10 +25,6 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get("/favicon.ico", (req, res) => {
-  res.status(204);
-});
-
 app.get("/robots.txt", (req, res) => {
   res.status(204);
 });
