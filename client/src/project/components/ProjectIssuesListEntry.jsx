@@ -25,7 +25,7 @@ const IssuesListEntry = ({ issue, setSelectedIssue }) => {
         </td>
         <td>{issue.summary}</td>
         <td>
-          {issue.assignee === user.name
+          {issue.assignee === user.email
             ? "me"
             : issue.assignee.map(email => <div>{email}</div>)}
         </td>
@@ -38,7 +38,7 @@ const IssuesListEntry = ({ issue, setSelectedIssue }) => {
         <td>{dateConverter(issue.created_date)}</td>
         <td>{issue.due_date === null ? "" : dateConverter(issue.due_date)}</td>
         <td></td>
-        <td>{issue.assigner === user.name ? "myself" : issue.assigner}</td>
+        <td>{issue.assigner === user.email ? "myself" : issue.assigner}</td>
         <td>
           {issue.attachment === "" ? (
             ""
