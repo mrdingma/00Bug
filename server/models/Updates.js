@@ -14,10 +14,7 @@ const UpdatesSchema = new Schema({
     type: String,
     default: ""
   },
-  assignee: {
-    type: String,
-    default: ""
-  },
+  assignee: [String],
   created_date: {
     type: Date,
     default: Date.now
