@@ -42,24 +42,10 @@ async function addComment(_id, status, comment) {
   return IssueModel.findOneAndUpdate(query, update);
 }
 
-async function update(issueId, data) {
-  const item = await getOne(issueId);
-
-  // if can't find item, throw error
-  if (!item) throw new Error("Could not find the requested item");
-
-  Object.keys(data).forEach(key => {
-    item[key] = data[key];
-  });
-
-  return item.save();
-}
-
 module.exports = {
   addNew,
   addComment,
   getOne,
-  update,
   deleteOne,
   getAllByUser,
   getAllByUserAndProject,
