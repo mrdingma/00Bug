@@ -12,7 +12,7 @@ const VerifyEmail = () => {
             <h3>Please verify your email</h3>
             <p>You're almost there! We sent an email to</p>
             <p>
-              <strong>{user.name}</strong>
+              <strong>{user.email}</strong>
             </p>
             <p>
               Just click on the link in that email to complete your signup.
