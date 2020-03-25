@@ -63,7 +63,7 @@ const Home = props => {
 
   // UPDATES AXIOS
   const getAllUpdates = () => {
-    const url = `/updates/user/${user.name}`;
+    const url = `/updates/user/${user.email}`;
 
     axios
       .get(url)
@@ -77,7 +77,7 @@ const Home = props => {
 
   // USER FRIENDS AXIOS
   const getAllFriends = () => {
-    const url = `/friends/user/${user.name}`;
+    const url = `/friends/user/${user.email}`;
 
     axios
       .get(url)
@@ -94,7 +94,7 @@ const Home = props => {
   const addFriend = email => {
     const url = "/friends";
     const params = {
-      userId: user.name,
+      userId: user.email,
       email
     };
 
@@ -108,7 +108,8 @@ const Home = props => {
       });
 
     const params2 = {
-      userId: user.name,
+      userId: user.email,
+      name: user.name,
       type: "Added a new user",
       text: `${email}`,
       assignee: email
@@ -126,7 +127,7 @@ const Home = props => {
 
   // PROJECT AXIOS
   const getAllProjects = () => {
-    const url = `/projects/user/${user.name}`;
+    const url = `/projects/user/${user.email}`;
 
     axios
       .get(url)
@@ -159,9 +160,10 @@ const Home = props => {
       });
 
     const params2 = {
-      userId: user.name,
+      userId: user.email,
       type: "Added a new project",
       text: name,
+      name: user.name,
       project: name
     };
 
@@ -177,7 +179,7 @@ const Home = props => {
 
   // ISSUES AXIOS FUNCTIONS
   const getAllIssues = () => {
-    const url = `/issues/user/${user.name}`;
+    const url = `/issues/user/${user.email}`;
 
     axios
       .get(url)
@@ -190,7 +192,7 @@ const Home = props => {
   };
 
   const getAllIssuesSortByDueDate = option => {
-    const url = `/issues/user/${user.name}?due_date=${option}`;
+    const url = `/issues/user/${user.email}?due_date=${option}`;
 
     axios
       .get(url)
@@ -220,7 +222,7 @@ const Home = props => {
 
   const getAllIssuesByProject = projectName => {
     setCurrentProject(projectName);
-    const url = `/issues/user/${user.name}/project/${projectName}`;
+    const url = `/issues/user/${user.email}/project/${projectName}`;
 
     axios
       .get(url)
@@ -244,7 +246,8 @@ const Home = props => {
         getAllIssuesByProject(data.project);
 
         const params2 = {
-          userId: user.name,
+          userId: user.email,
+          name: user.name,
           type: "Added a new issue",
           text: data.summary,
           attachment: data.attachment,
@@ -306,14 +309,15 @@ const Home = props => {
         const creator = data.userId;
         let assignee;
 
-        if (creator === user.name) {
+        if (creator === user.email) {
           assignee = data.assignee;
         } else {
           assignee = Array(data.assignee, creator).flat();
         }
 
         const params2 = {
-          userId: user.name,
+          userId: user.email,
+          name: user.name,
           type: `Comment added`,
           text: newComment.text,
           attachment: newComment.attachment,
