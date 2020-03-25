@@ -10,9 +10,8 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 1. [Setup](#setup)
 
 ## Features
-
 **User Authentication**
-
+<img src="https://gph.is/g/aKAvPO3">
 
 
 **User specific content**
@@ -29,7 +28,7 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 
 
 
-**Multiple assignee per ticket/task item
+**Multiple assignee per ticket/task item**
 
 
 
