@@ -1,8 +1,8 @@
 const UpdatesModel = require("../models/Updates");
 
 async function addNew(data) {
-  const issue = new UpdatesModel(data);
-  return issue.save();
+  const update = new UpdatesModel(data);
+  return update.save();
 }
 
 async function getAllByUser(userId) {
