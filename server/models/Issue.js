@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const IssueSchema = new Schema({
   userId: String,
+  name: String,
   project: String,
   status: String,
   due_date: Date,
@@ -22,6 +23,7 @@ const IssueSchema = new Schema({
   comments: [
     {
       userId: String,
+      name: String,
       text: String,
       date: { type: Date, default: Date.now },
       attachment: String,

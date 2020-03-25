@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const UpdatesSchema = new Schema({
   userId: String,
+  name: String,
   type: String,
   text: String,
   attachment: {
