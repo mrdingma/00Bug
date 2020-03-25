@@ -27,10 +27,11 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 
 **Ticket Creation**
 - ticket creation can be accessed via the main dashboard or once a individual project is selected.
+- image attachment functionality
+<img src="https://media.giphy.com/media/frGd7RLUkjah5KKaxo/giphy.gif">
 
-
-
-
+** Comment Creation**
+- text along with images can be added to any individual ticket via comments
 
 
 
