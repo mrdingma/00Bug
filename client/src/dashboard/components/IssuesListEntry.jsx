@@ -21,7 +21,7 @@ const IssuesListEntry = ({
   };
 
   const clickHandler = () => {
-    getAllIssuesByProject({ name: issue.project });
+    getAllIssuesByProject(issue.project);
     setCurrentTab("issue_list");
     setSelectedIssue(issue);
     clickIssueViewHandler();
