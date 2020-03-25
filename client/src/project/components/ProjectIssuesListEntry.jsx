@@ -25,11 +25,9 @@ const IssuesListEntry = ({ issue, setSelectedIssue }) => {
         </td>
         <td>{issue.summary}</td>
         <td>
-          {issue.assignee
-            ? issue.assignee === user.name
-              ? "me"
-              : issue.assignee
-            : ""}
+          {issue.assignee === user.name
+            ? "me"
+            : issue.assignee.map(email => <div>{email}</div>)}
         </td>
         <td>
           <IssueStatusTag issue={issue} />
