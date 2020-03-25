@@ -15,7 +15,7 @@ const Header = ({ addProject, addFriend }) => {
 
   const handleAddNewProject = () => {
     if (projectName !== "") {
-      addProject(user.name, projectName);
+      addProject(user.email, projectName);
       setProjectName("");
     }
   };
