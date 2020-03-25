@@ -53,8 +53,8 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 This was a two week solo project meant to demonstrate the creation of a full stack application.
 
 ## Technologies used:
-Styling: materialize-css, boostrap, react-materialize
-Database: mongoose/mongodb, docker, AWS
-React, react hooks, Express
-Deployment: Heroku
+- Styling: materialize-css, boostrap, react-materialize
+- Database: mongoose/mongodb, docker, AWS
+- React, react hooks, Express
+- Deployment: Heroku
 
