@@ -126,3 +126,68 @@ tr {
 .due-date-arrow {
   color: #5eb5a6;
 }
+
+.chips .input {
+  width: 100% !important;
+}
+
+.tag-item {
+  background-color: #4caf92;
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 30px;
+  height: 30px;
+  padding: 0 4px 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.3rem 0.3rem 0;
+}
+
+.tag-item > .button {
+  background-color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  margin-left: 10px;
+  font-weight: bold;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.autocomplete-ul {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  position: absolute;
+  z-index: 9999;
+  margin: 0;
+}
+
+.autocomplete-li {
+  font-size: 16px;
+  color: #26a69a;
+  display: block;
+  line-height: 22px;
+  padding: 14px 32px;
+}
+
+.autocomplete-li:hover {
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+.email-box {
+  text-align: center !important;
+  margin-top: 2em !important;
+  padding: 2em !important ;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
