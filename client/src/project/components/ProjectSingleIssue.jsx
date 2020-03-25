@@ -26,7 +26,6 @@ const ProjectSingleIssue = ({ selectedIssue, addComment }) => {
 
   const attachmentHandler = e => {
     const file = e.target.files[0];
-    debugger;
     if (
       file.type === "image/jpeg" ||
       file.type === "image/png" ||
@@ -34,7 +33,11 @@ const ProjectSingleIssue = ({ selectedIssue, addComment }) => {
     ) {
       setAttachment(file);
     } else {
-      alert("Only acceptable formats are JPG or PNG format");
+      M.toast({
+        html: "Only acceptable formats are JPG or PNG format",
+        inDuration: 100,
+        outDuration: 100
+      });
     }
   };
 
@@ -88,7 +91,7 @@ const ProjectSingleIssue = ({ selectedIssue, addComment }) => {
         <FormBody name="mainBody" className="row">
           <Collection>
             <CollectionItem className="avatar">
-              <img alt="" className="circle" src={user.picture} />
+              <img alt="" className="circle" src={selectedIssue.picture} />
               <span className="title">{selectedIssue.assigner}</span>
               <p>Created {dateParse2(selectedIssue.created_date)}</p>
             </CollectionItem>
