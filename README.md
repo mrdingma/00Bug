@@ -26,17 +26,17 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 <img src="https://media.giphy.com/media/RfAfpphPiE2P52xp6L/giphy.gif">
 
 **Ticket Creation**
-- ticket creation can be accessed via the main dashboard or once a individual project is selected.
+- accessible via the main dashboard or once a individual project is selected.
 - image attachment functionality
 <img src="https://media.giphy.com/media/frGd7RLUkjah5KKaxo/giphy.gif">
 
 ** Comment Creation**
 - text along with images can be added to any individual ticket via comments
+<img src="https://media.giphy.com/media/VEsOSj0n13HhZ8AlFA/giphy.gif">
 
-
-
-**Update Notification to all assigned parties**
-
+**Update Notification**
+- ticket creation, adding users, adding projects, and updating tickets will trigger a newsfeed like update to be generated and sent to all relevant parties
+<img src="https://media.giphy.com/media/YPtDdIV0NhkB2V2fxW/giphy.gif">
 
 
 **Dynamic status page by project**
