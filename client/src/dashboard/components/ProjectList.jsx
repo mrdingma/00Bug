@@ -21,7 +21,7 @@ const ProjectList = props => {
               <i class="material-icons">
                 {isClicked ? "arrow_drop_down" : "arrow_drop_up"}
               </i>
-              Projects
+              My Projects
             </div>
             <div class="collapsible-body" style={{ border: "none" }}>
               {props.projects.map(project => (
