@@ -100,8 +100,8 @@ const Home = props => {
 
     axios
       .post(url, params)
-      .then(({ data }) => {
-        setFriends(data);
+      .then(() => {
+        getAllFriends();
       })
       .catch(err => {
         console.log(err);
