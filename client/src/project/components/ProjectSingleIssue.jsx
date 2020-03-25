@@ -115,7 +115,9 @@ const ProjectSingleIssue = ({ selectedIssue, addComment }) => {
               Assignee:
             </div>
             <div className="col s5" style={{ minWidth: "auto" }}>
-              {selectedIssue.assignee}
+              {selectedIssue.assignee === user.email
+                ? "me"
+                : selectedIssue.assignee.map(email => <div>{email}</div>)}
             </div>
           </div>
 
