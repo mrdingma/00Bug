@@ -1,4 +1,4 @@
-<a href="https://bugtracker0.herokuapp.com"><img src="https://imgur.com/YhMbKED" alt="bugtracker logo"></a>
+<a href="https://bugtracker0.herokuapp.com"><img src="https://i.imgur.com/YhMbKED.png" alt="bugtracker logo"></a>
 
 ## bugtracker
 
