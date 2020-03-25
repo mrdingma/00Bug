@@ -21,13 +21,16 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 - Tickets can also be viewed on a per project basis, and drilled down individually.
 <img src="https://media.giphy.com/media/d9B9N9ab4ujZ2fTp0P/giphy.gif">
 
+**Friends system**
+- adding users allows you to easily assign tickets via autocomplete dropdown during ticket creation
+<img src="https://media.giphy.com/media/RfAfpphPiE2P52xp6L/giphy.gif">
 
 **Ticket Creation**
+- ticket creation can be accessed via the main dashboard or once a individual project is selected.
 
 
 
 
-**Friends system**
 
 
 
