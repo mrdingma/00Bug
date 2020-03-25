@@ -43,7 +43,8 @@ const NewIssueForm = ({ currentProject, addIssue, friends, addProject }) => {
   const clickAddIssueHandler = () => {
     const payload = new FormData();
     payload.append("image", attachment);
-    payload.set("userId", user.name);
+    payload.set("userId", user.email);
+    payload.set("name", user.name);
     payload.set("project", currentProject);
     payload.set("status", "open");
     payload.set("due_date", dueDate);
@@ -53,7 +54,7 @@ const NewIssueForm = ({ currentProject, addIssue, friends, addProject }) => {
     payload.set("type", type);
     payload.set("description", description);
     payload.set("assignee", assignee);
-    payload.set("assigner", user.name);
+    payload.set("assigner", user.email);
 
     // add project to each assignee
     assignee.forEach(email => addProject(email, currentProject));
@@ -142,10 +143,6 @@ const NewIssueForm = ({ currentProject, addIssue, friends, addProject }) => {
     M.FormSelect.init(elems, {});
     M.textareaAutoResize($("#textarea1"));
   });
-
-  // useEffect(() => {
-  //   setAssignee(user.name);
-  // }, []);
 
   let content = (
     <>
