@@ -69,9 +69,12 @@ module.exports = () => {
 
   router.post("/", parser.single("image"), async (req, res, next) => {
     try {
-      const issue = await issue_controller.addNew(
-        _.assignIn(req.body, { attachment: req.file ? req.file.url : "" })
-      );
+      const payload = _.assignIn(req.body, {
+        attachment: req.file ? req.file.url : ""
+      });
+      payload.assignee = payload.assignee.split(",");
+
+      const issue = await issue_controller.addNew(payload);
       return res.send(issue);
     } catch (err) {
       return next(err);
@@ -114,15 +117,6 @@ module.exports = () => {
       }
     }
   );
-
-  router.put("/:issueid", async (req, res, next) => {
-    try {
-      const updateIssue = await issue_controller.update(req.body);
-      return res.send(200);
-    } catch (err) {
-      return next(err);
-    }
-  });
 
   return router;
 };
