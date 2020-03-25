@@ -10,15 +10,13 @@ const IssueSchema = new Schema({
   summary: String,
   priority: String,
   type: String,
+  picture: String,
   created_date: {
     type: Date,
     default: Date.now
   },
   description: String,
-  assignee: {
-    type: String,
-    default: ""
-  },
+  assignee: [String],
   assigner: String,
   attachment: String,
   comments: [
