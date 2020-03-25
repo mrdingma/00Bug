@@ -10,7 +10,8 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 1. [Setup](#setup)
 
 ## Features
-**User Authentication**
+**Authentication**
+Utilized Auth0 for user authentication and verification. 
 <img src="https://media.giphy.com/media/Su1CYYXn1gRa3tRONG/giphy.gif">
 
 
