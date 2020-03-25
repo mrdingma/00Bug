@@ -55,7 +55,8 @@ const ProjectSingleIssue = ({ selectedIssue, addComment }) => {
     payload.append("image", attachment);
     payload.set("status", status);
     payload.set("text", comment);
-    payload.set("userId", user.name);
+    payload.set("userId", user.email);
+    payload.set("name", user.name);
     payload.set("picture", user.picture);
 
     addComment(payload);
