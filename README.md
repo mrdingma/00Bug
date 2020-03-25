@@ -15,11 +15,16 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 <img src="https://media.giphy.com/media/Su1CYYXn1gRa3tRONG/giphy.gif">
 
 **Ticket Display**
-- Sorting enabled by due date
+- Main dashboard page displays all tickets regardless of which project they are apart of. Sorting enabled by due date
 <img src="https://media.giphy.com/media/MdSQ09hLpfey5Z8yyr/giphy.gif">
+
+- Tickets can also be viewed on a per project basis, and drilled down individually.
+<img src="https://media.giphy.com/media/d9B9N9ab4ujZ2fTp0P/giphy.gif">
 
 
 **Ticket Creation**
+
+
 
 
 **Friends system**
