@@ -1,3 +1,5 @@
+<a href="https://bugtracker0.herokuapp.com"><img src="https://imgur.com/YhMbKED" alt="bugtracker logo"></a>
+
 ## bugtracker
 
 An project management/ ticket tracking application.
