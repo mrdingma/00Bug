@@ -7,7 +7,7 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 
 1. [Features](#features)
 1. [Additional Info](#additional-info)
-1. [Setup](#setup)
+1. [Technologies Used](#technologies-used)
 
 ## Features
 **Authentication**
@@ -30,8 +30,8 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 - image attachment functionality
 <img src="https://media.giphy.com/media/frGd7RLUkjah5KKaxo/giphy.gif">
 
-** Comment Creation**
-- text along with images can be added to any individual ticket via comments
+**Comment Creation**
+- text/images can be added to any individual ticket via comments
 <img src="https://media.giphy.com/media/VEsOSj0n13HhZ8AlFA/giphy.gif">
 
 **Update Notification**
@@ -40,17 +40,21 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 
 
 **Dynamic status page by project**
-
+- each project has a status page along with updates specific to that particular project
+<img src="https://i.imgur.com/dJU33Tz.png">
 
 
 **User specific content**
 - Content (projects, issues, updates) will only display if they are relevant for you (ie have been assigned or of your own creation)
 
 
-
 ## Additional Info
 
-This was a 2 day project with the goal of familiarizing myself more with charting technologies/ libraries. Technologies implemented in this project are React, D3, react-chartjs-2 (React wrapper for Chart.js).
+This was a two week solo project meant to demonstrate the creation of a full stack application.
 
-Unfortunately Coindesk API data updates every minute (instead of ideally every few seconds...allowing for price ticker to animate more regularly). Second challenge was the API only provided end of day closing prices for historical dates, so in order for me to build out a "Live" view (which represented prices for the last hour) and "1Day" view (24 hour period), I needed to set up a separate server that would query the API every minute and then save the responses into a database (I utilized mongodb for this). I would then query my own API for the aforementioned views.
+## Technologies used:
+Styling: materialize-css, boostrap, react-materialize
+Database: mongoose/mongodb, docker, AWS
+React, react hooks, Express
+Deployment: Heroku
 
