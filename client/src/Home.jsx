@@ -82,7 +82,9 @@ const Home = props => {
     axios
       .get(url)
       .then(({ data }) => {
-        setFriends(data[0].friends);
+        if (data.length > 0) {
+          setFriends(data[0].friends);
+        }
       })
       .catch(err => {
         console.log(err);
@@ -129,27 +131,31 @@ const Home = props => {
     axios
       .get(url)
       .then(({ data }) => {
-        setProjectList(data);
+        if (data.length > 0) {
+          setProjectList(data[0].name);
+        } else {
+          setProjectList([]);
+        }
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  const addProject = name => {
-    const url = "/projects";
+  // add to project table and updates table
+  const addProject = (userid, name) => {
+    const url = `/projects/user/${userid}`;
     const params = {
-      userId: user.name,
-      name
+      project: name
     };
 
     axios
       .post(url, params)
-      .then(({ data }) => {
-        setProjectList([...projectList, data]);
+      .then(() => {
+        getAllProjects();
       })
       .catch(err => {
-        console.log(error);
+        console.log(err);
       });
 
     const params2 = {
@@ -199,7 +205,9 @@ const Home = props => {
             break;
           }
         }
-        if (option === 1) {
+        if (dateIndex === undefined) {
+          setIssuesList(data);
+        } else if (option === 1) {
           setIssuesList(data.slice(dateIndex).concat(data.slice(0, dateIndex)));
         } else {
           setIssuesList(data.slice(nullIndex).concat(data.slice(0, nullIndex)));
@@ -210,9 +218,9 @@ const Home = props => {
       });
   };
 
-  const getAllIssuesByProject = proj => {
-    setCurrentProject(proj.name);
-    const url = `/issues/user/${user.name}/project/${proj.name}`;
+  const getAllIssuesByProject = projectName => {
+    setCurrentProject(projectName);
+    const url = `/issues/user/${user.name}/project/${projectName}`;
 
     axios
       .get(url)
@@ -224,6 +232,7 @@ const Home = props => {
       });
   };
 
+  // add to issue table and updates table
   const addIssue = d => {
     const url = "/issues";
 
@@ -231,7 +240,8 @@ const Home = props => {
       .post(url, d)
       .then(({ data }) => {
         setIssuesList([...issuesList, data]);
-        getAllIssuesByProject({ name: currentProject });
+
+        getAllIssuesByProject(data.project);
 
         const params2 = {
           userId: user.name,
@@ -244,7 +254,7 @@ const Home = props => {
 
         axios
           .post("/updates", params2)
-          .then(({ data }) => {
+          .then(() => {
             getAllUpdates();
           })
           .catch(err => {
@@ -282,31 +292,40 @@ const Home = props => {
       });
   };
 
+  // update issues table and updates table
   const addComment = d => {
     const url = `/issues/${selectedIssue._id}/comment`;
 
     axios
       .put(url, d)
       .then(({ data }) => {
-        getAllIssuesByProject({ name: currentProject });
+        getAllIssuesByProject(currentProject);
         getIssue(selectedIssue._id);
 
         const newComment = data.comments[data.comments.length - 1];
+        const creator = data.userId;
+        let assignee;
+
+        if (creator === user.name) {
+          assignee = data.assignee;
+        } else {
+          assignee = Array(data.assignee, creator).flat();
+        }
+
         const params2 = {
           userId: user.name,
           type: `Comment added`,
           text: newComment.text,
           attachment: newComment.attachment,
           project: data.project,
-          assignee: data.assignee
+          assignee
         };
-
-        debugger;
 
         axios
           .post("/updates", params2)
           .then(({ data }) => {
             getAllUpdates();
+            getAllIssues();
           })
           .catch(err => {
             console.log(err);
@@ -463,6 +482,7 @@ const Home = props => {
               friends={friends}
               currentProject={currentProject}
               addIssue={addIssue}
+              addProject={addProject}
             />
           </div>
         </div>
