@@ -6,7 +6,6 @@ module.exports = () => {
 
   router.get("/user/:userid", async (req, res, next) => {
     try {
-      debugger;
       const updates = await updates_controller.getAllByUser(req.params.userid);
       return res.send(updates);
     } catch (err) {
