@@ -14,22 +14,15 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 - Utilized Auth0 for user authentication and verification. 
 <img src="https://media.giphy.com/media/Su1CYYXn1gRa3tRONG/giphy.gif">
 
+**Ticket Display**
+- Sorting enabled by due date
+<img src="https://media.giphy.com/media/MdSQ09hLpfey5Z8yyr/giphy.gif">
 
-**User specific content**
 
-
-**Sorting**
+**Ticket Creation**
 
 
 **Friends system**
-
-
-
-**Image attachment**
-
-
-
-**Multiple assignee per ticket/task item**
 
 
 
@@ -38,6 +31,11 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 
 
 **Dynamic status page by project**
+
+
+
+**User specific content**
+- Content (projects, issues, updates) will only display if they are relevant for you (ie have been assigned or of your own creation)
 
 
 
