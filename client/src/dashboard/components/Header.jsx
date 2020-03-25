@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { Modal, TextInput, Button } from "react-materialize";
+import { useAuth0 } from "../../auth0.jsx";
 
 const Header = ({ addProject, addFriend }) => {
   const [projectName, setProjectName] = useState("");
   const [newFriend, setNewFriend] = useState("");
+  const { user, logout } = useAuth0();
+
+  const logoutWithRedirect = () =>
+    logout({
+      returnTo: window.location.origin
+    });
 
   const handleAddNewProject = () => {
     if (projectName !== "") {
-      addProject(projectName);
+      addProject(user.name, projectName);
       setProjectName("");
     }
   };
@@ -18,7 +25,11 @@ const Header = ({ addProject, addFriend }) => {
       addFriend(newFriend);
       setNewFriend("");
     } else {
-      alert("Enter a valid email address");
+      M.toast({
+        html: "Enter a valid email address",
+        inDuration: 100,
+        outDuration: 100
+      });
       setNewFriend("");
     }
   };
@@ -111,6 +122,9 @@ const Header = ({ addProject, addFriend }) => {
                     onChange={e => setNewFriend(e.target.value)}
                   />
                 </Modal>
+                <li onClick={() => logoutWithRedirect()}>
+                  <a>Log Out</a>
+                </li>
               </ul>
             </li>
           </ul>
