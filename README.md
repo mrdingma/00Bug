@@ -11,7 +11,7 @@ An project management/ ticket tracking<a href="https://bugtracker0.herokuapp.com
 
 ## Features
 **User Authentication**
-<img src="https://gph.is/g/aKAvPO3">
+<img src="https://media.giphy.com/media/Su1CYYXn1gRa3tRONG/giphy.gif">
 
 
 **User specific content**
